@@ -8,12 +8,19 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
     }
-
-
+    
+    @IBAction func buttonPressed(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "GameScene", bundle: nil)
+        let nextViewController = storyboard.instantiateViewController(withIdentifier: "GameScene") as! GameViewController
+        self.present(nextViewController, animated: true, completion: nil)
+    }
+    
+    
+    
 }
 
