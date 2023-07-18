@@ -36,12 +36,10 @@ class GameViewController: UIViewController {
     
     @objc func swipedRight() {
         gameScene?.swipeRight()
-        print("Swiped Right")
     }
     
     @objc func swipedLeft() {
         gameScene?.swipeLeft()
-        print("Swiped Left")
     }
 
 }

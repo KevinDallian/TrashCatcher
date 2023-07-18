@@ -11,6 +11,9 @@ import UIKit
 
 class GameScene : SKScene{
     let binNode = BinNode()
+    // Constant for moving binNode
+    let movePoints = 180.0
+    
     override func didMove(to view: SKView) {
         setupBackground(to: view)
         setupBin()
@@ -35,13 +38,17 @@ class GameScene : SKScene{
     }
     
     public func swipeLeft(){
-        let moveLeftAction = SKAction.move(to: CGPoint(x: binNode.position.x - 200, y: binNode.position.y), duration: 0.2)
-        binNode.run(moveLeftAction)
+        let moveLeftAction = SKAction.move(to: CGPoint(x: binNode.position.x - movePoints, y: binNode.position.y), duration: 0.2)
+        if binNode.position.x - movePoints >= frame.minX {
+            binNode.run(moveLeftAction)
+        }
     }
     
     public func swipeRight(){
-        let moveRightAction = SKAction.move(to: CGPoint(x: binNode.position.x + 200, y: binNode.position.y), duration: 0.2)
-        binNode.run(moveRightAction)
+        let moveRightAction = SKAction.move(to: CGPoint(x: binNode.position.x + movePoints, y: binNode.position.y), duration: 0.2)
+        if binNode.position.x + movePoints <= frame.maxX {
+            binNode.run(moveRightAction)
+        }
     }
     
 }
