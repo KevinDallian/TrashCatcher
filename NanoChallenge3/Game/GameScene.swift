@@ -10,8 +10,10 @@ import SpriteKit
 import UIKit
 
 class GameScene : SKScene{
+    
     override func didMove(to view: SKView) {
         setupBackground(to: view)
+        setupBin()
     }
     
     private func setupBackground(to view: SKView){
@@ -25,6 +27,12 @@ class GameScene : SKScene{
         let scaledSize = CGSize(width: sceneAspectRatio.width * scale, height: sceneAspectRatio.height * scale)
         self.size = scaledSize
         self.backgroundColor = .systemPink
+    }
+    
+    private func setupBin(){
+        let binNode = BinNode()
+        binNode.position = CGPoint(x: frame.midX, y: frame.minY)
+        addChild(binNode)
     }
     
 }
