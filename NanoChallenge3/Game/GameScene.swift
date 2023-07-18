@@ -15,8 +15,11 @@ class GameScene : SKScene{
     let movePoints = 180.0
     
     override func didMove(to view: SKView) {
+        physicsWorld.gravity = CGVector(dx: 0, dy: -9.8)
         setupBackground(to: view)
         setupBin()
+        loopSpawnGarbage()
+
     }
     
     private func setupBackground(to view: SKView){
@@ -37,6 +40,25 @@ class GameScene : SKScene{
         addChild(binNode)
     }
     
+    private func spawnGarbage(){
+        let garbage = GarbageNode()
+        garbage.position = CGPoint(x: frame.midX, y: frame.maxY)
+        addChild(garbage)
+    }
+    
+    private func loopSpawnGarbage(){
+        let spawnAction = SKAction.run {
+            self.spawnGarbage()
+        }
+        
+        let rollAction = SKAction.rotate(byAngle: 360, duration: 1)
+
+        let delayAction = SKAction.wait(forDuration: 0.75)
+        let spawnSequence = SKAction.sequence([spawnAction,rollAction, delayAction])
+        
+        run(SKAction.repeatForever(spawnSequence))
+    }
+    
     public func swipeLeft(){
         let moveLeftAction = SKAction.move(to: CGPoint(x: binNode.position.x - movePoints, y: binNode.position.y), duration: 0.2)
         if binNode.position.x - movePoints >= frame.minX {
@@ -50,5 +72,7 @@ class GameScene : SKScene{
             binNode.run(moveRightAction)
         }
     }
+    
+    
     
 }

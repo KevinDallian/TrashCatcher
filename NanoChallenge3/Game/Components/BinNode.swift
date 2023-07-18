@@ -9,7 +9,7 @@ import Foundation
 import SpriteKit
 
 class BinNode : SKSpriteNode {
-    let imageUrl = "garbage"
+    let imageUrl = "garbagebin"
     
     init(){
         let binNode = SKSpriteNode(imageNamed: imageUrl)
