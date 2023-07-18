@@ -9,6 +9,7 @@ import UIKit
 import SpriteKit
 
 class GameViewController: UIViewController {
+    var gameScene : GameScene?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,7 +20,7 @@ class GameViewController: UIViewController {
     private func setupSKView(){
         let skView = SKView(frame: self.view.bounds)
         self.view.addSubview(skView)
-        let gameScene = GameScene(size: skView.bounds.size)
+        gameScene = GameScene(size: skView.bounds.size)
         skView.presentScene(gameScene)
     }
     
@@ -34,11 +35,13 @@ class GameViewController: UIViewController {
     }
     
     @objc func swipedRight() {
-       print("Swiped right")
+        gameScene?.swipeRight()
+        print("Swiped Right")
     }
     
     @objc func swipedLeft() {
-       print("Swiped left")
+        gameScene?.swipeLeft()
+        print("Swiped Left")
     }
 
 }

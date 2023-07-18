@@ -10,7 +10,7 @@ import SpriteKit
 import UIKit
 
 class GameScene : SKScene{
-    
+    let binNode = BinNode()
     override func didMove(to view: SKView) {
         setupBackground(to: view)
         setupBin()
@@ -30,10 +30,18 @@ class GameScene : SKScene{
     }
     
     private func setupBin(){
-        let binNode = BinNode()
         binNode.position = CGPoint(x: frame.midX, y: frame.minY)
         addChild(binNode)
     }
     
+    public func swipeLeft(){
+        let moveLeftAction = SKAction.move(to: CGPoint(x: binNode.position.x - 200, y: binNode.position.y), duration: 0.2)
+        binNode.run(moveLeftAction)
+    }
+    
+    public func swipeRight(){
+        let moveRightAction = SKAction.move(to: CGPoint(x: binNode.position.x + 200, y: binNode.position.y), duration: 0.2)
+        binNode.run(moveRightAction)
+    }
     
 }

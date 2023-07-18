@@ -15,9 +15,6 @@ class ViewController: UIViewController {
     }
     
     @IBAction func buttonPressed(_ sender: Any) {
-//        let storyboard = UIStoryboard(name: "GameScene", bundle: nil)
-//        let nextViewController = storyboard.instantiateViewController(withIdentifier: "GameScene") as! GameViewController
-//        self.present(nextViewController, animated: true, completion: nil)
         let nextViewController = GameViewController()
         self.present(nextViewController, animated: true, completion: nil)
     }
