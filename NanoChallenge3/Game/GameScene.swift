@@ -11,6 +11,7 @@ import UIKit
 
 class GameScene : SKScene, SKPhysicsContactDelegate{
     let binNode = BinNode()
+    
     // Constant for moving binNode
     let movePoints = 180.0
     
@@ -36,6 +37,7 @@ class GameScene : SKScene, SKPhysicsContactDelegate{
         }
     }
     
+    //MARK: Setup Background
     private func setupBackground(to view: SKView){
         let tvScreenSize = view.bounds.size
         let sceneAspectRatio = CGSize(width: 16, height: 9)
@@ -49,6 +51,7 @@ class GameScene : SKScene, SKPhysicsContactDelegate{
         self.backgroundColor = .systemPink
     }
     
+    //MARK: Setup Bin
     private func setupBin(){
         binNode.position = CGPoint(x: frame.midX, y: frame.minY)
         binNode.physicsBody = SKPhysicsBody(rectangleOf: binNode.size)
@@ -60,6 +63,7 @@ class GameScene : SKScene, SKPhysicsContactDelegate{
         addChild(binNode)
     }
     
+    //MARK: Garbage Spawning
     private func spawnGarbage(){
         let garbage = GarbageNode()
         let randomXPosition = CGFloat.random(in: frame.minX..<frame.maxX)
@@ -83,6 +87,7 @@ class GameScene : SKScene, SKPhysicsContactDelegate{
         run(SKAction.repeatForever(spawnSequence))
     }
     
+    //MARK: Swipe Handling
     public func swipeLeft(){
         let moveLeftAction = SKAction.move(to: CGPoint(x: binNode.position.x - movePoints, y: binNode.position.y), duration: 0.2)
         if binNode.position.x - movePoints >= frame.minX {
@@ -97,6 +102,7 @@ class GameScene : SKScene, SKPhysicsContactDelegate{
         }
     }
     
+    //MARK: Collision
     private func handleCollision(_ contact : SKPhysicsContact){
         // get garbageNode that collides
         if let garbageNode = contact.bodyA.node as? GarbageNode ?? contact.bodyB.node as? GarbageNode {
@@ -105,6 +111,7 @@ class GameScene : SKScene, SKPhysicsContactDelegate{
         }
     }
     
+    //MARK: GarbageNode Remover
     private func removeGarbageNodesBelowScreen() {
         // Get the bottom position of the screen (y = 0 in SpriteKit coordinate system)
         let bottomOfScreen = CGPoint(x: 0, y: 0)

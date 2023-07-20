@@ -27,6 +27,7 @@ class GameViewController: UIViewController, ScoreDelegate, RestartDelegate {
         setupHUD()
     }
     
+    //MARK: SKView
     private func setupSKView(){
         let skView = SKView(frame: self.view.bounds)
         skView.ignoresSiblingOrder = true
@@ -35,7 +36,7 @@ class GameViewController: UIViewController, ScoreDelegate, RestartDelegate {
         gameScene?.scoreDelegate = self
         skView.presentScene(gameScene)
     }
-    
+    //MARK: SwipeGestureRecognizer
     func setupSwipedGestureRecognizer() {
         let rightSwipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(swipedRight))
         rightSwipeGesture.direction = .right
@@ -46,6 +47,15 @@ class GameViewController: UIViewController, ScoreDelegate, RestartDelegate {
         view.addGestureRecognizer(leftSwipeGesture)
     }
     
+    @objc func swipedRight() {
+        gameScene?.swipeRight()
+    }
+    
+    @objc func swipedLeft() {
+        gameScene?.swipeLeft()
+    }
+    
+    //MARK: HUD
     func setupHUD(){
         // set scoreLabel
         scoreLabel = UILabel(frame: CGRect(x: view.bounds.maxX - 100, y: view.bounds.minY, width: 100, height: 100))
@@ -59,14 +69,7 @@ class GameViewController: UIViewController, ScoreDelegate, RestartDelegate {
         self.view.addSubview(timerLabel!)
     }
     
-    @objc func swipedRight() {
-        gameScene?.swipeRight()
-    }
-    
-    @objc func swipedLeft() {
-        gameScene?.swipeLeft()
-    }
-    
+    //MARK: Timer
     @objc func updateTimer(){
         // Decrement the remaining seconds by 1
         timeSeconds -= 1
@@ -80,11 +83,6 @@ class GameViewController: UIViewController, ScoreDelegate, RestartDelegate {
         updateTimerLabel()
     }
     
-    func addScore() {
-        score += 1
-        scoreLabel?.text = String(score)
-    }
-    
     private func stopTimer(){
         timer?.invalidate()
         timer = nil
@@ -96,11 +94,13 @@ class GameViewController: UIViewController, ScoreDelegate, RestartDelegate {
         timerLabel?.text = "\(timeSeconds)"
     }
     
+    //MARK: Popup
     private func showPopup() {
         // Create the popup view and customize it if needed
-        popupView = PopUpView(frame: CGRect(x: 0, y: 0, width: 500, height: 500))
+        popupView = PopUpView(frame: CGRect(x: 0, y: 0, width: 906, height: 466))
         popupView?.center = view.center
         popupView?.restartDelegate = self
+        popupView?.setupScore(score: score)
 
         // Add the popup view as a subview to the main view
         if let popupView = popupView {
@@ -119,9 +119,15 @@ class GameViewController: UIViewController, ScoreDelegate, RestartDelegate {
     func returnToHome() {
         dismiss(animated: true, completion: nil)
     }
+    
+    func addScore() {
+        score += 1
+        scoreLabel?.text = String(score)
+    }
 
 }
 
+//MARK: Protocols
 protocol ScoreDelegate {
     func addScore()
 }

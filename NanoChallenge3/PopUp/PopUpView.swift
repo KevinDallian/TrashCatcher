@@ -11,9 +11,11 @@ import SpriteKit
 class PopUpView: UIView {
     
     var restartDelegate : RestartDelegate?
+    var score = 0
+    
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Game Over"
+        label.text = "Congratulations!"
         label.textAlignment = .center
         label.font = UIFont.boldSystemFont(ofSize: 48)
         label.textColor = .black
@@ -24,7 +26,7 @@ class PopUpView: UIView {
     private let dismissButton: CustomFocusableButton = {
         let button = CustomFocusableButton(type: .system)
         button.setTitle("Dismiss", for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 40)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .systemPink
         button.layer.cornerRadius = 10
@@ -33,10 +35,30 @@ class PopUpView: UIView {
         return button
     }()
     
+    private let captionLabel : UILabel = {
+        let label = UILabel()
+        label.text = "Your Score"
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 40)
+        label.textColor = .black
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let scoreLabel : UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 40)
+        label.textColor = .black
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    
     private let restartButton: CustomFocusableButton = {
         let button = CustomFocusableButton(type: .system)
         button.setTitle("Restart", for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 40)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .systemPink
         button.layer.cornerRadius = 10
@@ -67,14 +89,22 @@ class PopUpView: UIView {
         addSubview(titleLabel)
         addSubview(dismissButton)
         addSubview(restartButton)
+        addSubview(captionLabel)
+        addSubview(scoreLabel)
         
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 20),
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             
-            dismissButton.centerXAnchor.constraint(equalTo: centerXAnchor), // Center horizontally
-            dismissButton.centerYAnchor.constraint(equalTo: centerYAnchor), // Center vertically
+            captionLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            captionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
+            
+            scoreLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            scoreLabel.topAnchor.constraint(equalTo: captionLabel.bottomAnchor, constant: 15),
+            
+            dismissButton.centerXAnchor.constraint(equalTo: centerXAnchor),  // Center vertically
+            dismissButton.topAnchor.constraint(equalTo: scoreLabel.bottomAnchor, constant: 20),
             
             restartButton.centerXAnchor.constraint(equalTo: centerXAnchor), // Center horizontally
             restartButton.topAnchor.constraint(equalTo: dismissButton.bottomAnchor, constant: 20), // Position below dismissButton with 20 points spacing
@@ -89,6 +119,11 @@ class PopUpView: UIView {
     @objc private func restartButtonTapped() {
         removeFromSuperview()
         restartDelegate?.resetGame()
+    }
+    
+    func setupScore(score: Int){
+        self.score = score
+        scoreLabel.text = String(score)
     }
     
     
