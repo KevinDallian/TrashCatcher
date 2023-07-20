@@ -63,7 +63,7 @@ class GameScene : SKScene, SKPhysicsContactDelegate{
     private func spawnGarbage(){
         let garbage = GarbageNode()
         let randomXPosition = CGFloat.random(in: frame.minX..<frame.maxX)
-        garbage.position = CGPoint(x: frame.midX, y: frame.maxY)
+        garbage.position = CGPoint(x: randomXPosition, y: frame.maxY)
         garbage.physicsBody = SKPhysicsBody(rectangleOf: garbage.size)
         garbage.physicsBody?.isDynamic = true
         

@@ -13,6 +13,10 @@ class GameViewController: UIViewController, GameViewControllerDelegate {
     var score = 0
     var scoreLabel : UILabel?
     
+    var timeSeconds = 60
+    var timer : Timer?
+    var timerLabel : UILabel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSKView()
@@ -40,10 +44,16 @@ class GameViewController: UIViewController, GameViewControllerDelegate {
     }
     
     func setupHUD(){
+        // set scoreLabel
         scoreLabel = UILabel(frame: CGRect(x: view.bounds.maxX - 100, y: view.bounds.minY, width: 100, height: 100))
         scoreLabel?.text = String(score)
         scoreLabel?.textColor = .white
         self.view.addSubview(scoreLabel!)
+        
+        timerLabel = UILabel(frame: CGRect(x: view.bounds.minX + 100, y: view.bounds.minY, width: 100, height: 100))
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+        timerLabel?.text = "\(timeSeconds)"
+        self.view.addSubview(timerLabel!)
     }
     
     @objc func swipedRight() {
@@ -54,6 +64,19 @@ class GameViewController: UIViewController, GameViewControllerDelegate {
         gameScene?.swipeLeft()
     }
     
+    @objc func updateTimer(){
+        // Decrement the remaining seconds by 1
+        timeSeconds -= 1
+
+        // Check if the timer has reached 0 (or below) to stop the timer
+        if timeSeconds <= 0 {
+            stopTimer()
+        }
+
+        // Update the UI with the new remaining time
+        updateTimerLabel()
+    }
+    
     func addScore() {
         score += 1
         scoreLabel?.text = String(score)
@@ -61,6 +84,15 @@ class GameViewController: UIViewController, GameViewControllerDelegate {
     
     func startTimer() {
         //
+    }
+    
+    private func stopTimer(){
+        timer?.invalidate()
+        timer = nil
+    }
+    
+    private func updateTimerLabel(){
+        timerLabel?.text = "\(timeSeconds)"
     }
 
 }
