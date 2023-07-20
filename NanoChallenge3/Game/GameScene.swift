@@ -14,7 +14,7 @@ class GameScene : SKScene, SKPhysicsContactDelegate{
     // Constant for moving binNode
     let movePoints = 180.0
     
-    var gameViewControllerDelegate : GameViewControllerDelegate?
+    var scoreDelegate : ScoreDelegate?
     
     override func didMove(to view: SKView) {
         // gravity and detect collision
@@ -101,9 +101,25 @@ class GameScene : SKScene, SKPhysicsContactDelegate{
         // get garbageNode that collides
         if let garbageNode = contact.bodyA.node as? GarbageNode ?? contact.bodyB.node as? GarbageNode {
             garbageNode.removeFromParent()
-            gameViewControllerDelegate?.addScore()
+            scoreDelegate?.addScore()
         }
     }
     
+    private func removeGarbageNodesBelowScreen() {
+        // Get the bottom position of the screen (y = 0 in SpriteKit coordinate system)
+        let bottomOfScreen = CGPoint(x: 0, y: 0)
+
+        // Loop through all the child nodes in the scene
+        for node in children {
+            // Check if the node is a GarbageNode and its position is below the screen
+            if let garbageNode = node as? GarbageNode, garbageNode.position.y < bottomOfScreen.y {
+                // Remove the garbage node from the scene
+                garbageNode.removeFromParent()
+            }
+        }
+    }
     
+    override func update(_ currentTime: TimeInterval) {
+        removeGarbageNodesBelowScreen()
+    }
 }

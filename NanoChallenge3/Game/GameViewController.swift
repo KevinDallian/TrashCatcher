@@ -8,14 +8,17 @@
 import UIKit
 import SpriteKit
 
-class GameViewController: UIViewController, GameViewControllerDelegate {
+class GameViewController: UIViewController, ScoreDelegate, RestartDelegate {
+    
     var gameScene : GameScene?
     var score = 0
     var scoreLabel : UILabel?
     
-    var timeSeconds = 60
+    var timeSeconds = 10
     var timer : Timer?
     var timerLabel : UILabel?
+    
+    var popupView : PopUpView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +32,7 @@ class GameViewController: UIViewController, GameViewControllerDelegate {
         skView.ignoresSiblingOrder = true
         self.view.addSubview(skView)
         gameScene = GameScene(size: skView.bounds.size)
-        gameScene?.gameViewControllerDelegate = self
+        gameScene?.scoreDelegate = self
         skView.presentScene(gameScene)
     }
     
@@ -82,22 +85,48 @@ class GameViewController: UIViewController, GameViewControllerDelegate {
         scoreLabel?.text = String(score)
     }
     
-    func startTimer() {
-        //
-    }
-    
     private func stopTimer(){
         timer?.invalidate()
         timer = nil
+        
+        showPopup()
     }
     
     private func updateTimerLabel(){
         timerLabel?.text = "\(timeSeconds)"
     }
+    
+    private func showPopup() {
+        // Create the popup view and customize it if needed
+        popupView = PopUpView(frame: CGRect(x: 0, y: 0, width: 500, height: 500))
+        popupView?.center = view.center
+        popupView?.restartDelegate = self
+
+        // Add the popup view as a subview to the main view
+        if let popupView = popupView {
+            view.addSubview(popupView)
+        }
+    }
+    
+    func resetGame() {
+        score = 0
+        timeSeconds = 60
+        scoreLabel?.text = String(score)
+        updateTimer()
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+    }
+    
+    func returnToHome() {
+        dismiss(animated: true, completion: nil)
+    }
 
 }
 
-protocol GameViewControllerDelegate {
+protocol ScoreDelegate {
     func addScore()
-    func startTimer()
+}
+
+protocol RestartDelegate {
+    func resetGame()
+    func returnToHome()
 }

@@ -12,6 +12,8 @@
 		D80917CF2A657301007593A4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D80917CD2A657301007593A4 /* Main.storyboard */; };
 		D80917D12A657302007593A4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D80917D02A657302007593A4 /* Assets.xcassets */; };
 		D80917D42A657302007593A4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D80917D22A657302007593A4 /* LaunchScreen.storyboard */; };
+		D821579D2A693602004650C5 /* PopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D821579C2A693602004650C5 /* PopUpView.swift */; };
+		D821579F2A69396A004650C5 /* CustomFocusableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D821579E2A69396A004650C5 /* CustomFocusableButton.swift */; };
 		D83666092A67146E0051EA5B /* GarbageNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83666082A67146E0051EA5B /* GarbageNode.swift */; };
 		D84497032A6665A1001BEBE9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84497022A6665A1001BEBE9 /* AppDelegate.swift */; };
 		D84497052A6665A1001BEBE9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84497042A6665A1001BEBE9 /* SceneDelegate.swift */; };
@@ -32,6 +34,8 @@
 		D80917CE2A657301007593A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D80917D02A657302007593A4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D80917D32A657302007593A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		D821579C2A693602004650C5 /* PopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpView.swift; sourceTree = "<group>"; };
+		D821579E2A69396A004650C5 /* CustomFocusableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFocusableButton.swift; sourceTree = "<group>"; };
 		D83666082A67146E0051EA5B /* GarbageNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GarbageNode.swift; sourceTree = "<group>"; };
 		D84497002A6665A1001BEBE9 /* NanoChallenge3-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NanoChallenge3-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D84497022A6665A1001BEBE9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -88,6 +92,7 @@
 		D80917C82A657301007593A4 /* NanoChallenge3 */ = {
 			isa = PBXGroup;
 			children = (
+				D82157992A69337A004650C5 /* PopUp */,
 				D84497142A666F99001BEBE9 /* Game */,
 				D80917C92A657301007593A4 /* AppDelegate.swift */,
 				D80917CB2A657301007593A4 /* ViewController.swift */,
@@ -96,6 +101,14 @@
 				D80917D22A657302007593A4 /* LaunchScreen.storyboard */,
 			);
 			path = NanoChallenge3;
+			sourceTree = "<group>";
+		};
+		D82157992A69337A004650C5 /* PopUp */ = {
+			isa = PBXGroup;
+			children = (
+				D821579C2A693602004650C5 /* PopUpView.swift */,
+			);
+			path = PopUp;
 			sourceTree = "<group>";
 		};
 		D84497012A6665A1001BEBE9 /* NanoChallenge3-iOS */ = {
@@ -135,6 +148,7 @@
 			children = (
 				D84ABF652A66DCA80044FFFE /* BinNode.swift */,
 				D83666082A67146E0051EA5B /* GarbageNode.swift */,
+				D821579E2A69396A004650C5 /* CustomFocusableButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -241,6 +255,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D821579D2A693602004650C5 /* PopUpView.swift in Sources */,
+				D821579F2A69396A004650C5 /* CustomFocusableButton.swift in Sources */,
 				D84ABF662A66DCA80044FFFE /* BinNode.swift in Sources */,
 				D80917CC2A657301007593A4 /* ViewController.swift in Sources */,
 				D84497202A669FAD001BEBE9 /* GameViewController.swift in Sources */,
