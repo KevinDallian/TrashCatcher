@@ -11,11 +11,13 @@ import SpriteKit
 class GameViewController: UIViewController, GameViewControllerDelegate {
     var gameScene : GameScene?
     var score = 0
+    var scoreLabel : UILabel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSKView()
         setupSwipedGestureRecognizer()
+        setupHUD()
     }
     
     private func setupSKView(){
@@ -37,6 +39,13 @@ class GameViewController: UIViewController, GameViewControllerDelegate {
         view.addGestureRecognizer(leftSwipeGesture)
     }
     
+    func setupHUD(){
+        scoreLabel = UILabel(frame: CGRect(x: view.bounds.maxX - 100, y: view.bounds.minY, width: 100, height: 100))
+        scoreLabel?.text = String(score)
+        scoreLabel?.textColor = .white
+        self.view.addSubview(scoreLabel!)
+    }
+    
     @objc func swipedRight() {
         gameScene?.swipeRight()
     }
@@ -47,6 +56,7 @@ class GameViewController: UIViewController, GameViewControllerDelegate {
     
     func addScore() {
         score += 1
+        scoreLabel?.text = String(score)
     }
     
     func startTimer() {
