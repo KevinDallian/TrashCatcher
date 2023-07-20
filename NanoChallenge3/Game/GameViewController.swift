@@ -8,8 +8,9 @@
 import UIKit
 import SpriteKit
 
-class GameViewController: UIViewController {
+class GameViewController: UIViewController, GameViewControllerDelegate {
     var gameScene : GameScene?
+    var score = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,8 +20,10 @@ class GameViewController: UIViewController {
     
     private func setupSKView(){
         let skView = SKView(frame: self.view.bounds)
+        skView.ignoresSiblingOrder = true
         self.view.addSubview(skView)
         gameScene = GameScene(size: skView.bounds.size)
+        gameScene?.gameViewControllerDelegate = self
         skView.presentScene(gameScene)
     }
     
@@ -41,5 +44,18 @@ class GameViewController: UIViewController {
     @objc func swipedLeft() {
         gameScene?.swipeLeft()
     }
+    
+    func addScore() {
+        score += 1
+    }
+    
+    func startTimer() {
+        //
+    }
 
+}
+
+protocol GameViewControllerDelegate {
+    func addScore()
+    func startTimer()
 }
