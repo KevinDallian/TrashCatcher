@@ -14,13 +14,7 @@ class CustomFocusableButton : UIButton {
     }
     
     override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
-//        if isFocused {
-//            // Set the focused background color when the button is selected
-//            self.backgroundColor = .clear
-//        } else {
-//            // Set the default background color when the button is not selected
-//            self.backgroundColor = .clear
-//        }
+        
     }
     
 }
@@ -31,7 +25,6 @@ extension CustomFocusableButton {
         button.setTitle(title, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: CGFloat(fontSize))
         button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .clear
         button.setBackgroundImage(nil, for: .normal)
         button.setBackgroundImage(nil, for: .focused)
         button.setBackgroundImage(nil, for: .highlighted)

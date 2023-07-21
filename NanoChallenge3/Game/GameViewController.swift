@@ -14,10 +14,13 @@ class GameViewController: UIViewController, ScoreDelegate {
     var score = 0
     var scoreLabel : UILabel?
     
-    let gameDuration = 60
-    var remainingSeconds = 60
+    let gameDuration : TimeInterval = 60
+    var remainingSeconds : TimeInterval = 60
     var timer : Timer?
     var timerLabel : UILabel?
+    var rectangleBar: UIView!
+    var rectangleBarWidthConstraint: NSLayoutConstraint!
+    var widthAnimator: UIViewPropertyAnimator?
     
     var popupView : PopUpView?
     let dismissButton = CustomFocusableButton().createButton(title: "New Game", fontSize: 40)
@@ -60,16 +63,66 @@ class GameViewController: UIViewController, ScoreDelegate {
     
     //MARK: HUD
     func setupHUD(){
-        // set scoreLabel
-        scoreLabel = UILabel(frame: CGRect(x: view.bounds.maxX - 100, y: view.bounds.minY, width: 100, height: 100))
+        //MARK: Score
+        scoreLabel = UILabel(frame: CGRect(x: view.bounds.maxX - 118, y: view.bounds.minY + 109, width: 100, height: 100))
         scoreLabel?.text = String(score)
         scoreLabel?.textColor = .white
+        scoreLabel?.font = UIFont.systemFont(ofSize: 40)
         self.view.addSubview(scoreLabel!)
         
-        timerLabel = UILabel(frame: CGRect(x: view.bounds.minX + 100, y: view.bounds.minY, width: 100, height: 100))
+        
+        let scoreCaption = UILabel(frame: CGRect(x: view.bounds.maxX - 374, y: view.bounds.minY + 109, width: 200, height: 100))
+        scoreCaption.text = "Score"
+        scoreCaption.textColor = .white
+        scoreCaption.font = UIFont.systemFont(ofSize: 40)
+        self.view.addSubview(scoreCaption)
+        
+        let highScoreCaption = UILabel(frame: CGRect(x: view.bounds.maxX - 374, y: view.bounds.minY + 62, width: 200, height: 100))
+        highScoreCaption.text = "Highest Score"
+        highScoreCaption.textColor = UIColor(named: "Gray")
+        highScoreCaption.font = UIFont.systemFont(ofSize: 24)
+        self.view.addSubview(highScoreCaption)
+        
+        let highScoreLabel = UILabel(frame: CGRect(x: view.bounds.maxX - 118, y: view.bounds.minY + 62, width: 100, height: 100))
+        highScoreLabel.text = String(0)
+        highScoreLabel.textColor = UIColor(named: "Gray")
+        highScoreLabel.font = UIFont.systemFont(ofSize: 24)
+        self.view.addSubview(highScoreLabel)
+        
+        //MARK: RectangleBar
+        rectangleBar = UIView()
+        rectangleBar.backgroundColor = .systemYellow // Set the color of the rectangle bar
+        rectangleBar.translatesAutoresizingMaskIntoConstraints = false
+        rectangleBar.layer.cornerRadius = 10
+        let grayBar = UIView()
+        grayBar.backgroundColor = .gray
+        grayBar.translatesAutoresizingMaskIntoConstraints = false
+        grayBar.layer.cornerRadius = 10
+        view.addSubview(grayBar)
+        view.addSubview(rectangleBar)
+    
+        rectangleBarWidthConstraint = rectangleBar.widthAnchor.constraint(equalToConstant: 400)
+        rectangleBarWidthConstraint.isActive = true
+        
+        NSLayoutConstraint.activate([
+            rectangleBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 68),
+            rectangleBar.topAnchor.constraint(equalTo: view.topAnchor, constant: 90),
+            rectangleBar.heightAnchor.constraint(equalToConstant: 40),
+            
+            grayBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 68),
+            grayBar.topAnchor.constraint(equalTo: view.topAnchor, constant: 90),
+            grayBar.heightAnchor.constraint(equalToConstant: 40),
+            grayBar.widthAnchor.constraint(equalToConstant: 400)
+        ])
+        
+        timerLabel = UILabel(frame: CGRect(x: view.bounds.minX + 398, y: view.bounds.minY + 60, width: 100, height: 100))
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
-        timerLabel?.text = "\(remainingSeconds)"
+        timerLabel?.text = String(format: "0:%.0f", remainingSeconds)
+        timerLabel?.font = UIFont.systemFont(ofSize: 25)
+        timerLabel?.textColor = .black
         self.view.addSubview(timerLabel!)
+        
+        
     }
     
     //MARK: Timer
@@ -79,22 +132,34 @@ class GameViewController: UIViewController, ScoreDelegate {
 
         // Check if the timer has reached 0 (or below) to stop the timer
         if remainingSeconds <= 0 {
+            widthAnimator?.stopAnimation(true)
             stopTimer()
         }
+        
+        let progress = remainingSeconds / gameDuration // Calculate the progress from 1.0 to 0
 
+        // Update the width constraint of the rectangle bar based on the progress
+        rectangleBarWidthConstraint.constant = progress * 400
+        widthAnimator = UIViewPropertyAnimator(duration: 1.0, curve: .linear, animations: {
+            self.view.layoutIfNeeded()
+        })
+        widthAnimator?.startAnimation()
         // Update the UI with the new remaining time
         updateTimerLabel()
     }
     
     private func stopTimer(){
+        
         timer?.invalidate()
         timer = nil
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.showPopup()
+        }
         
-        showPopup()
     }
     
     private func updateTimerLabel(){
-        timerLabel?.text = "\(remainingSeconds)"
+        timerLabel?.text = String(format: "0:%.0f", remainingSeconds)
     }
     
     //MARK: Popup

@@ -48,7 +48,7 @@ class GameScene : SKScene, SKPhysicsContactDelegate{
         
         let scaledSize = CGSize(width: sceneAspectRatio.width * scale, height: sceneAspectRatio.height * scale)
         self.size = scaledSize
-        self.backgroundColor = .systemPink
+        self.backgroundColor = .systemIndigo
     }
     
     //MARK: Setup Bin
