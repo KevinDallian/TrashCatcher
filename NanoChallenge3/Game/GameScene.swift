@@ -19,7 +19,7 @@ class GameScene : SKScene, SKPhysicsContactDelegate{
     
     override func didMove(to view: SKView) {
         // gravity and detect collision
-        physicsWorld.gravity = CGVector(dx: 0, dy: -9.8)
+        physicsWorld.gravity = CGVector(dx: 0, dy: -5.0)
         physicsWorld.contactDelegate = self
         
         setupBackground(to: view)
@@ -68,6 +68,7 @@ class GameScene : SKScene, SKPhysicsContactDelegate{
         let garbage = GarbageNode()
         let randomXPosition = CGFloat.random(in: frame.minX..<frame.maxX)
         garbage.position = CGPoint(x: randomXPosition, y: frame.maxY)
+        
         garbage.physicsBody = SKPhysicsBody(rectangleOf: garbage.size)
         garbage.physicsBody?.isDynamic = true
         

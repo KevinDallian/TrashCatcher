@@ -63,7 +63,6 @@ class GameViewController: UIViewController, ScoreDelegate {
     
     //MARK: HUD
     func setupHUD(){
-        //MARK: Score
         scoreLabel = UILabel(frame: CGRect(x: view.bounds.maxX - 118, y: view.bounds.minY + 109, width: 100, height: 100))
         scoreLabel?.text = String(score)
         scoreLabel?.textColor = .white
@@ -84,7 +83,7 @@ class GameViewController: UIViewController, ScoreDelegate {
         self.view.addSubview(highScoreCaption)
         
         let highScoreLabel = UILabel(frame: CGRect(x: view.bounds.maxX - 118, y: view.bounds.minY + 62, width: 100, height: 100))
-        highScoreLabel.text = String(0)
+        highScoreLabel.text = String(UserDefaults.standard.integer(forKey: "highscore"))
         highScoreLabel.textColor = UIColor(named: "Gray")
         highScoreLabel.font = UIFont.systemFont(ofSize: 24)
         self.view.addSubview(highScoreLabel)
@@ -95,7 +94,7 @@ class GameViewController: UIViewController, ScoreDelegate {
         rectangleBar.translatesAutoresizingMaskIntoConstraints = false
         rectangleBar.layer.cornerRadius = 10
         let grayBar = UIView()
-        grayBar.backgroundColor = .gray
+        grayBar.backgroundColor = UIColor(named: "Gray")
         grayBar.translatesAutoresizingMaskIntoConstraints = false
         grayBar.layer.cornerRadius = 10
         view.addSubview(grayBar)
@@ -192,6 +191,8 @@ class GameViewController: UIViewController, ScoreDelegate {
         // Add the popup view as a subview to the main view
         
     }
+    
+    //MARK: Buttons
     
     @objc private func dismissButtonTapped() {
         dismiss(animated: true, completion: nil)

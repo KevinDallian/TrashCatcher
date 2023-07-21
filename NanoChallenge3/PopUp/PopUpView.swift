@@ -80,6 +80,7 @@ class PopUpView: UIView {
     func setupScore(score: Int){
         self.score = score
         scoreLabel.text = String(score)
+        UserDefaults.standard.set(score, forKey: "highscore")
     }
     
     
