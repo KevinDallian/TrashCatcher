@@ -8,17 +8,20 @@
 import UIKit
 import SpriteKit
 
-class GameViewController: UIViewController, ScoreDelegate, RestartDelegate {
+class GameViewController: UIViewController, ScoreDelegate {
     
     var gameScene : GameScene?
     var score = 0
     var scoreLabel : UILabel?
     
-    var timeSeconds = 10
+    let gameDuration = 60
+    var remainingSeconds = 60
     var timer : Timer?
     var timerLabel : UILabel?
     
     var popupView : PopUpView?
+    let dismissButton = CustomFocusableButton().createButton(title: "New Game", fontSize: 40)
+    let restartButton = CustomFocusableButton().createButton(title: "Play Again", fontSize: 40)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,17 +68,17 @@ class GameViewController: UIViewController, ScoreDelegate, RestartDelegate {
         
         timerLabel = UILabel(frame: CGRect(x: view.bounds.minX + 100, y: view.bounds.minY, width: 100, height: 100))
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
-        timerLabel?.text = "\(timeSeconds)"
+        timerLabel?.text = "\(remainingSeconds)"
         self.view.addSubview(timerLabel!)
     }
     
     //MARK: Timer
     @objc func updateTimer(){
         // Decrement the remaining seconds by 1
-        timeSeconds -= 1
+        remainingSeconds -= 1
 
         // Check if the timer has reached 0 (or below) to stop the timer
-        if timeSeconds <= 0 {
+        if remainingSeconds <= 0 {
             stopTimer()
         }
 
@@ -91,7 +94,7 @@ class GameViewController: UIViewController, ScoreDelegate, RestartDelegate {
     }
     
     private func updateTimerLabel(){
-        timerLabel?.text = "\(timeSeconds)"
+        timerLabel?.text = "\(remainingSeconds)"
     }
     
     //MARK: Popup
@@ -99,25 +102,45 @@ class GameViewController: UIViewController, ScoreDelegate, RestartDelegate {
         // Create the popup view and customize it if needed
         popupView = PopUpView(frame: CGRect(x: 0, y: 0, width: 906, height: 466))
         popupView?.center = view.center
-        popupView?.restartDelegate = self
         popupView?.setupScore(score: score)
-
-        // Add the popup view as a subview to the main view
         if let popupView = popupView {
             view.addSubview(popupView)
         }
+        dismissButton.addTarget(self, action: #selector(dismissButtonTapped), for: .primaryActionTriggered)
+        self.view.addSubview(dismissButton)
+        restartButton.addTarget(self, action: #selector(restartButtonTapped), for: .primaryActionTriggered)
+        self.view.addSubview(restartButton)
+        
+        NSLayoutConstraint.activate([
+            // ... Existing constraints ...
+
+            // Constraints for the dismiss button
+            restartButton.topAnchor.constraint(equalTo: popupView!.bottomAnchor, constant: 20),
+            restartButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -150),
+
+            // Constraints for the restart button
+            dismissButton.topAnchor.constraint(equalTo: popupView!.bottomAnchor, constant: 20),
+            dismissButton.leadingAnchor.constraint(equalTo: restartButton.trailingAnchor, constant: 50),
+            dismissButton.bottomAnchor.constraint(equalTo: restartButton.bottomAnchor),
+        ])
+
+        // Add the popup view as a subview to the main view
+        
     }
     
-    func resetGame() {
+    @objc private func dismissButtonTapped() {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @objc private func restartButtonTapped() {
+        popupView?.removeFromSuperview()
         score = 0
-        timeSeconds = 60
+        remainingSeconds = gameDuration
         scoreLabel?.text = String(score)
         updateTimer()
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
-    }
-    
-    func returnToHome() {
-        dismiss(animated: true, completion: nil)
+        restartButton.removeFromSuperview()
+        dismissButton.removeFromSuperview()
     }
     
     func addScore() {
@@ -130,9 +153,4 @@ class GameViewController: UIViewController, ScoreDelegate, RestartDelegate {
 //MARK: Protocols
 protocol ScoreDelegate {
     func addScore()
-}
-
-protocol RestartDelegate {
-    func resetGame()
-    func returnToHome()
 }

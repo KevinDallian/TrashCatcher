@@ -12,6 +12,7 @@
 		D80917CF2A657301007593A4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D80917CD2A657301007593A4 /* Main.storyboard */; };
 		D80917D12A657302007593A4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D80917D02A657302007593A4 /* Assets.xcassets */; };
 		D80917D42A657302007593A4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D80917D22A657302007593A4 /* LaunchScreen.storyboard */; };
+		D80B50172A6A507B009D3F3E /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D80B50162A6A507B009D3F3E /* SwiftUI.framework */; };
 		D821579D2A693602004650C5 /* PopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D821579C2A693602004650C5 /* PopUpView.swift */; };
 		D821579F2A69396A004650C5 /* CustomFocusableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D821579E2A69396A004650C5 /* CustomFocusableButton.swift */; };
 		D83666092A67146E0051EA5B /* GarbageNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83666082A67146E0051EA5B /* GarbageNode.swift */; };
@@ -34,6 +35,7 @@
 		D80917CE2A657301007593A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D80917D02A657302007593A4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D80917D32A657302007593A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		D80B50162A6A507B009D3F3E /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS16.4.sdk/System/Library/Frameworks/SwiftUI.framework; sourceTree = DEVELOPER_DIR; };
 		D821579C2A693602004650C5 /* PopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpView.swift; sourceTree = "<group>"; };
 		D821579E2A69396A004650C5 /* CustomFocusableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFocusableButton.swift; sourceTree = "<group>"; };
 		D83666082A67146E0051EA5B /* GarbageNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GarbageNode.swift; sourceTree = "<group>"; };
@@ -64,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D80B50172A6A507B009D3F3E /* SwiftUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,6 +95,7 @@
 		D80917C82A657301007593A4 /* NanoChallenge3 */ = {
 			isa = PBXGroup;
 			children = (
+				D80B50132A6A3AAB009D3F3E /* GlobalComponents */,
 				D82157992A69337A004650C5 /* PopUp */,
 				D84497142A666F99001BEBE9 /* Game */,
 				D80917C92A657301007593A4 /* AppDelegate.swift */,
@@ -101,6 +105,14 @@
 				D80917D22A657302007593A4 /* LaunchScreen.storyboard */,
 			);
 			path = NanoChallenge3;
+			sourceTree = "<group>";
+		};
+		D80B50132A6A3AAB009D3F3E /* GlobalComponents */ = {
+			isa = PBXGroup;
+			children = (
+				D821579E2A69396A004650C5 /* CustomFocusableButton.swift */,
+			);
+			path = GlobalComponents;
 			sourceTree = "<group>";
 		};
 		D82157992A69337A004650C5 /* PopUp */ = {
@@ -138,6 +150,7 @@
 		D84ABF5F2A66D1DD0044FFFE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D80B50162A6A507B009D3F3E /* SwiftUI.framework */,
 				D84ABF602A66D1DD0044FFFE /* SpriteKit.framework */,
 			);
 			name = Frameworks;
@@ -148,7 +161,6 @@
 			children = (
 				D84ABF652A66DCA80044FFFE /* BinNode.swift */,
 				D83666082A67146E0051EA5B /* GarbageNode.swift */,
-				D821579E2A69396A004650C5 /* CustomFocusableButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
