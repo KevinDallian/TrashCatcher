@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     
     @IBAction func buttonPressed(_ sender: Any) {
         let nextViewController = GameViewController()
+        nextViewController.modalPresentationStyle = .fullScreen
         self.present(nextViewController, animated: true, completion: nil)
     }
     
