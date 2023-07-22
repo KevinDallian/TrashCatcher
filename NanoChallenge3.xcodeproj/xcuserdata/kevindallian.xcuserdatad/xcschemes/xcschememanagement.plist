@@ -6,11 +6,22 @@
 	<dict>
 		<key>NanoChallenge3-iOS.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<true/>
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
+		<key>NanoChallenge3-tvOS 1.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 		<key>NanoChallenge3-tvOS.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<true/>
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
@@ -23,6 +34,11 @@
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>D80917C52A657301007593A4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D84496FF2A6665A1001BEBE9</key>
 		<dict>
 			<key>primary</key>
 			<true/>

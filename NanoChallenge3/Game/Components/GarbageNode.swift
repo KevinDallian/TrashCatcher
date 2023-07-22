@@ -24,7 +24,6 @@ class GarbageNode : SKSpriteNode {
         garbageNode.physicsBody?.restitution = 0.5 // Adjust the restitution (bounciness) as desired
         garbageNode.physicsBody?.friction = 0.2 // Adjust the friction as desired
 
-        
         super.init(texture: nil, color: .clear, size: garbageNodeSize)
         addChild(garbageNode)
     }

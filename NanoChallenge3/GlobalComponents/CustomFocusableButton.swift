@@ -22,12 +22,14 @@ class CustomFocusableButton : UIButton {
 extension CustomFocusableButton {
     func createButton(title: String, fontSize: Int) -> CustomFocusableButton {
         let button = CustomFocusableButton(type: .system)
+        button.configuration?.baseBackgroundColor = .clear
         button.setTitle(title, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: CGFloat(fontSize))
         button.setTitleColor(.white, for: .normal)
-        button.setBackgroundImage(nil, for: .normal)
-        button.setBackgroundImage(nil, for: .focused)
-        button.setBackgroundImage(nil, for: .highlighted)
+        button.setBackgroundImage(UIImage(named: "buttonbackground"), for: .normal)
+        button.setBackgroundImage(UIImage(named: "buttonbackgroundfocused"), for: .focused)
+        button.adjustsImageWhenHighlighted = true
+        button.backgroundColor = .none
         button.layer.cornerRadius = 10
         button.translatesAutoresizingMaskIntoConstraints = false
         return button

@@ -14,12 +14,13 @@ class GameScene : SKScene, SKPhysicsContactDelegate{
     
     // Constant for moving binNode
     let movePoints = 180.0
-    
+    let backgroundimage = "gamebackground"
+
     var scoreDelegate : ScoreDelegate?
     
     override func didMove(to view: SKView) {
         // gravity and detect collision
-        physicsWorld.gravity = CGVector(dx: 0, dy: -9.8)
+        physicsWorld.gravity = CGVector(dx: 0, dy: -5.0)
         physicsWorld.contactDelegate = self
         
         setupBackground(to: view)
@@ -28,11 +29,8 @@ class GameScene : SKScene, SKPhysicsContactDelegate{
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
-        // Check if binNode and garbageNode collide
         if (contact.bodyA.categoryBitMask == 1 && contact.bodyB.categoryBitMask == 2) ||
            (contact.bodyA.categoryBitMask == 2 && contact.bodyB.categoryBitMask == 1) {
-            // Collision detected between binNode and garbageNode
-            // Handle adding score points and removing garbageNode here
             handleCollision(contact)
         }
     }
@@ -48,12 +46,16 @@ class GameScene : SKScene, SKPhysicsContactDelegate{
         
         let scaledSize = CGSize(width: sceneAspectRatio.width * scale, height: sceneAspectRatio.height * scale)
         self.size = scaledSize
-        self.backgroundColor = .systemIndigo
+        let background = SKSpriteNode(imageNamed: backgroundimage)
+        background.position = CGPoint(x: frame.midX, y: frame.midY)
+        background.zPosition = -1
+        background.size = scaledSize
+        addChild(background)
     }
     
     //MARK: Setup Bin
     private func setupBin(){
-        binNode.position = CGPoint(x: frame.midX, y: frame.minY)
+        binNode.position = CGPoint(x: frame.midX, y: frame.minY + 250   )
         binNode.physicsBody = SKPhysicsBody(rectangleOf: binNode.size)
         binNode.physicsBody?.isDynamic = false
         
@@ -68,6 +70,7 @@ class GameScene : SKScene, SKPhysicsContactDelegate{
         let garbage = GarbageNode()
         let randomXPosition = CGFloat.random(in: frame.minX..<frame.maxX)
         garbage.position = CGPoint(x: randomXPosition, y: frame.maxY)
+        
         garbage.physicsBody = SKPhysicsBody(rectangleOf: garbage.size)
         garbage.physicsBody?.isDynamic = true
         
@@ -93,6 +96,9 @@ class GameScene : SKScene, SKPhysicsContactDelegate{
         if binNode.position.x - movePoints >= frame.minX {
             binNode.run(moveLeftAction)
         }
+        let texture = SKTexture(imageNamed: switchCharacterPosition(characterPosition: .right, character: binNode.imageUrl))
+        binNode.run(SKAction.setTexture(texture))
+        
     }
     
     public func swipeRight(){
@@ -100,6 +106,8 @@ class GameScene : SKScene, SKPhysicsContactDelegate{
         if binNode.position.x + movePoints <= frame.maxX {
             binNode.run(moveRightAction)
         }
+        let texture = SKTexture(imageNamed: switchCharacterPosition(characterPosition: .left, character: binNode.imageUrl))
+        binNode.run(SKAction.setTexture(texture))
     }
     
     //MARK: Collision
@@ -114,7 +122,7 @@ class GameScene : SKScene, SKPhysicsContactDelegate{
     //MARK: GarbageNode Remover
     private func removeGarbageNodesBelowScreen() {
         // Get the bottom position of the screen (y = 0 in SpriteKit coordinate system)
-        let bottomOfScreen = CGPoint(x: 0, y: 0)
+        let bottomOfScreen = CGPoint(x: 0, y: 220)
 
         // Loop through all the child nodes in the scene
         for node in children {

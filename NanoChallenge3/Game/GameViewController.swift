@@ -9,11 +9,16 @@ import UIKit
 import SpriteKit
 
 class GameViewController: UIViewController, ScoreDelegate {
-    
+    //MARK: Gameplay Variables
     var gameScene : GameScene?
     var score = 0
     var scoreLabel : UILabel?
+    var highScoreLabel : UILabel?
+    var popupView : PopUpView?
+    let dismissButton = CustomFocusableButton().createButton(title: "New Game", fontSize: 40)
+    let restartButton = CustomFocusableButton().createButton(title: "Play Again", fontSize: 40)
     
+    //MARK: Timer Variable
     let gameDuration : TimeInterval = 60
     var remainingSeconds : TimeInterval = 60
     var timer : Timer?
@@ -21,10 +26,6 @@ class GameViewController: UIViewController, ScoreDelegate {
     var rectangleBar: UIView!
     var rectangleBarWidthConstraint: NSLayoutConstraint!
     var widthAnimator: UIViewPropertyAnimator?
-    
-    var popupView : PopUpView?
-    let dismissButton = CustomFocusableButton().createButton(title: "New Game", fontSize: 40)
-    let restartButton = CustomFocusableButton().createButton(title: "Play Again", fontSize: 40)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,7 +42,9 @@ class GameViewController: UIViewController, ScoreDelegate {
         gameScene = GameScene(size: skView.bounds.size)
         gameScene?.scoreDelegate = self
         skView.presentScene(gameScene)
+        
     }
+    
     //MARK: SwipeGestureRecognizer
     func setupSwipedGestureRecognizer() {
         let rightSwipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(swipedRight))
@@ -63,14 +66,13 @@ class GameViewController: UIViewController, ScoreDelegate {
     
     //MARK: HUD
     func setupHUD(){
-        //MARK: Score
         scoreLabel = UILabel(frame: CGRect(x: view.bounds.maxX - 118, y: view.bounds.minY + 109, width: 100, height: 100))
         scoreLabel?.text = String(score)
         scoreLabel?.textColor = .white
         scoreLabel?.font = UIFont.systemFont(ofSize: 40)
         self.view.addSubview(scoreLabel!)
         
-        
+        //MARK: Score
         let scoreCaption = UILabel(frame: CGRect(x: view.bounds.maxX - 374, y: view.bounds.minY + 109, width: 200, height: 100))
         scoreCaption.text = "Score"
         scoreCaption.textColor = .white
@@ -83,19 +85,19 @@ class GameViewController: UIViewController, ScoreDelegate {
         highScoreCaption.font = UIFont.systemFont(ofSize: 24)
         self.view.addSubview(highScoreCaption)
         
-        let highScoreLabel = UILabel(frame: CGRect(x: view.bounds.maxX - 118, y: view.bounds.minY + 62, width: 100, height: 100))
-        highScoreLabel.text = String(0)
-        highScoreLabel.textColor = UIColor(named: "Gray")
-        highScoreLabel.font = UIFont.systemFont(ofSize: 24)
-        self.view.addSubview(highScoreLabel)
+        highScoreLabel = UILabel(frame: CGRect(x: view.bounds.maxX - 118, y: view.bounds.minY + 62, width: 100, height: 100))
+        highScoreLabel?.text = String(UserDefaults.standard.integer(forKey: "highscore"))
+        highScoreLabel?.textColor = UIColor(named: "Gray")
+        highScoreLabel?.font = UIFont.systemFont(ofSize: 24)
+        self.view.addSubview(highScoreLabel!)
         
         //MARK: RectangleBar
         rectangleBar = UIView()
-        rectangleBar.backgroundColor = .systemYellow // Set the color of the rectangle bar
+        rectangleBar.backgroundColor = .systemGreen // Set the color of the rectangle bar
         rectangleBar.translatesAutoresizingMaskIntoConstraints = false
         rectangleBar.layer.cornerRadius = 10
         let grayBar = UIView()
-        grayBar.backgroundColor = .gray
+        grayBar.backgroundColor = UIColor(named: "Gray")
         grayBar.translatesAutoresizingMaskIntoConstraints = false
         grayBar.layer.cornerRadius = 10
         view.addSubview(grayBar)
@@ -115,6 +117,11 @@ class GameViewController: UIViewController, ScoreDelegate {
             grayBar.widthAnchor.constraint(equalToConstant: 400)
         ])
         
+        //MARK: Timer
+        let timerCaption = UILabel(frame: CGRect(x: view.bounds.minX + 380, y: view.bounds.minY + 10, width: 100, height: 100))
+        timerCaption.text = "Timer"
+        timerCaption.font = .systemFont(ofSize: 32)
+        self.view.addSubview(timerCaption)
         timerLabel = UILabel(frame: CGRect(x: view.bounds.minX + 398, y: view.bounds.minY + 60, width: 100, height: 100))
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
         timerLabel?.text = String(format: "0:%.0f", remainingSeconds)
@@ -124,8 +131,7 @@ class GameViewController: UIViewController, ScoreDelegate {
         
         
     }
-    
-    //MARK: Timer
+    //MARK: Timer Functions
     @objc func updateTimer(){
         // Decrement the remaining seconds by 1
         remainingSeconds -= 1
@@ -134,6 +140,10 @@ class GameViewController: UIViewController, ScoreDelegate {
         if remainingSeconds <= 0 {
             widthAnimator?.stopAnimation(true)
             stopTimer()
+        }else if remainingSeconds <= 10 {
+            rectangleBar.backgroundColor = .systemRed
+        }else if remainingSeconds <= 30 {
+            rectangleBar.backgroundColor = .systemYellow
         }
         
         let progress = remainingSeconds / gameDuration // Calculate the progress from 1.0 to 0
@@ -177,23 +187,20 @@ class GameViewController: UIViewController, ScoreDelegate {
         self.view.addSubview(restartButton)
         
         NSLayoutConstraint.activate([
-            // ... Existing constraints ...
-
-            // Constraints for the dismiss button
             restartButton.topAnchor.constraint(equalTo: popupView!.bottomAnchor, constant: 20),
             restartButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -150),
 
-            // Constraints for the restart button
             dismissButton.topAnchor.constraint(equalTo: popupView!.bottomAnchor, constant: 20),
             dismissButton.leadingAnchor.constraint(equalTo: restartButton.trailingAnchor, constant: 50),
             dismissButton.bottomAnchor.constraint(equalTo: restartButton.bottomAnchor),
         ])
-
-        // Add the popup view as a subview to the main view
         
     }
     
+    //MARK: Buttons
+    
     @objc private func dismissButtonTapped() {
+        highScoreLabel?.text = String(UserDefaults.standard.integer(forKey: "highscore"))
         dismiss(animated: true, completion: nil)
     }
     
