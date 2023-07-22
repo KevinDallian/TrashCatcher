@@ -7,6 +7,7 @@
 
 import UIKit
 import SpriteKit
+import AVFoundation
 
 class GameViewController: UIViewController, ScoreDelegate {
     //MARK: Gameplay Variables
@@ -34,6 +35,10 @@ class GameViewController: UIViewController, ScoreDelegate {
         return imageView
     }()
     
+    //Audio
+    var audioPlayerBackground: AVAudioPlayer?
+    var audioPlayer: AVAudioPlayer?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSKView()
@@ -43,6 +48,23 @@ class GameViewController: UIViewController, ScoreDelegate {
         hidePersonImageViewAfterDelay(3.0)
         
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setupAudioBackground(resourceName: "Gameplay", ofType: "mp3", shouldLoop: true, volume: 0.2)
+        // Check if the audio player is available and play the audio
+        if let player = audioPlayerBackground {
+            player.play()
+        }
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+            super.viewWillDisappear(animated)
+
+            // Stop the audio player when the view disappears
+            audioPlayerBackground?.stop()
+        }
+    
+    
     
     //MARK: SKView
     private func setupSKView(){
@@ -237,13 +259,21 @@ class GameViewController: UIViewController, ScoreDelegate {
     }
     
     //MARK: Buttons
-    
     @objc private func dismissButtonTapped() {
+        // Play the "Button click" audio
+        setupAudio(resourceName: "Button Click", ofType: "mp3", shouldLoop: false, volume: 1.0)
+        audioPlayer?.play()
+        
+
         highScoreLabel?.text = String(UserDefaults.standard.integer(forKey: "highscore"))
         dismiss(animated: true, completion: nil)
     }
     
     @objc private func restartButtonTapped() {
+        // Play the "Button click" audio
+        setupAudio(resourceName: "Button Click", ofType: "mp3", shouldLoop: false, volume: 1.0)
+        audioPlayer?.play()
+        
         popupView?.removeFromSuperview()
         score = 0
         remainingSeconds = gameDuration
@@ -252,12 +282,31 @@ class GameViewController: UIViewController, ScoreDelegate {
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
         restartButton.removeFromSuperview()
         dismissButton.removeFromSuperview()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.setupAudioBackground(resourceName: "Gameplay", ofType: "mp3", shouldLoop: false, volume: 0.2)
+            self.audioPlayerBackground?.play()
+        }
+       
     }
     
     func addScore() {
+        // Play the "Button click" audio
+        if audioPlayerBackground!.isPlaying {
+            audioPlayerBackground!.pause()
+        }
+        
+        setupAudio(resourceName: "Item Collected", ofType: "mp3", shouldLoop: false, volume: 1.0)
+        audioPlayer?.play()
         score += 1
         scoreLabel?.text = String(score)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            if !self.audioPlayerBackground!.isPlaying {
+                self.audioPlayerBackground!.play()
+            }
+        }
     }
+    
     func setupPersonImageView() {
         view.addSubview(personImageView)
         
@@ -268,6 +317,7 @@ class GameViewController: UIViewController, ScoreDelegate {
             personImageView.heightAnchor.constraint(equalToConstant: 640)
         ])
     }
+    
     func hidePersonImageViewAfterDelay(_ delay: TimeInterval) {
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) { [weak self] in
             guard let self = self else { return }
@@ -279,8 +329,12 @@ class GameViewController: UIViewController, ScoreDelegate {
         }
     }
     
-    
-    
+    func setupAudioBackground(resourceName:String, ofType:String, shouldLoop:Bool, volume: Float){
+        audioPlayerBackground = AVAudioPlayer.setupAudioPlayer(resourceName: resourceName, ofType: ofType, shouldLoop: shouldLoop, volume: volume)
+    }
+    func setupAudio(resourceName:String, ofType:String, shouldLoop:Bool, volume: Float){
+        audioPlayer = AVAudioPlayer.setupAudioPlayer(resourceName: resourceName, ofType: ofType, shouldLoop: shouldLoop, volume: volume)
+    }
 }
 
 //MARK: Protocols

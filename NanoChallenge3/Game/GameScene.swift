@@ -138,6 +138,7 @@ class GameScene : SKScene, SKPhysicsContactDelegate{
         // get garbageNode that collides
         if let garbageNode = contact.bodyA.node as? GarbageNode ?? contact.bodyB.node as? GarbageNode {
             garbageNode.removeFromParent()
+            
             scoreDelegate?.addScore()
         }
     }
