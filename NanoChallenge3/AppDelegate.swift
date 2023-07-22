@@ -15,6 +15,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        let fontName = "BubblegumSans-Regular"
+        UILabel.appearance().font = UIFont(name: fontName, size: 17)
+        UIButton.appearance().titleLabel?.font = UIFont(name: fontName, size: 17)
+        
         return true
     }
 
