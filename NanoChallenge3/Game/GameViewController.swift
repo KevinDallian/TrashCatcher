@@ -93,7 +93,7 @@ class GameViewController: UIViewController, ScoreDelegate {
         
         //MARK: RectangleBar
         rectangleBar = UIView()
-        rectangleBar.backgroundColor = .systemYellow // Set the color of the rectangle bar
+        rectangleBar.backgroundColor = .systemGreen // Set the color of the rectangle bar
         rectangleBar.translatesAutoresizingMaskIntoConstraints = false
         rectangleBar.layer.cornerRadius = 10
         let grayBar = UIView()
@@ -140,6 +140,10 @@ class GameViewController: UIViewController, ScoreDelegate {
         if remainingSeconds <= 0 {
             widthAnimator?.stopAnimation(true)
             stopTimer()
+        }else if remainingSeconds <= 10 {
+            rectangleBar.backgroundColor = .systemRed
+        }else if remainingSeconds <= 30 {
+            rectangleBar.backgroundColor = .systemYellow
         }
         
         let progress = remainingSeconds / gameDuration // Calculate the progress from 1.0 to 0

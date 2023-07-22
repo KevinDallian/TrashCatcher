@@ -13,7 +13,7 @@ class BinNode : SKSpriteNode {
     
     init(){
         let imageTexture = SKTexture(imageNamed: "\(imageUrl)-right")
-        let binNodeSize = CGSize(width: imageTexture.size().width, height: imageTexture.size().height)
+        let binNodeSize = CGSize(width: imageTexture.size().width - 50, height: imageTexture.size().height - 100)
         super.init(texture: imageTexture, color: .clear, size: binNodeSize)
     }
     

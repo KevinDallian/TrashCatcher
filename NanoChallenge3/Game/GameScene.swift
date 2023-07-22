@@ -14,6 +14,7 @@ class GameScene : SKScene, SKPhysicsContactDelegate{
     
     // Constant for moving binNode
     let movePoints = 180.0
+    let backgroundimage = "gamebackground"
 
     var scoreDelegate : ScoreDelegate?
     
@@ -45,7 +46,7 @@ class GameScene : SKScene, SKPhysicsContactDelegate{
         
         let scaledSize = CGSize(width: sceneAspectRatio.width * scale, height: sceneAspectRatio.height * scale)
         self.size = scaledSize
-        let background = SKSpriteNode(imageNamed: "background")
+        let background = SKSpriteNode(imageNamed: backgroundimage)
         background.position = CGPoint(x: frame.midX, y: frame.midY)
         background.zPosition = -1
         background.size = scaledSize
@@ -54,7 +55,7 @@ class GameScene : SKScene, SKPhysicsContactDelegate{
     
     //MARK: Setup Bin
     private func setupBin(){
-        binNode.position = CGPoint(x: frame.midX, y: frame.minY + 150)
+        binNode.position = CGPoint(x: frame.midX, y: frame.minY + 250   )
         binNode.physicsBody = SKPhysicsBody(rectangleOf: binNode.size)
         binNode.physicsBody?.isDynamic = false
         
@@ -121,7 +122,7 @@ class GameScene : SKScene, SKPhysicsContactDelegate{
     //MARK: GarbageNode Remover
     private func removeGarbageNodesBelowScreen() {
         // Get the bottom position of the screen (y = 0 in SpriteKit coordinate system)
-        let bottomOfScreen = CGPoint(x: 0, y: 0)
+        let bottomOfScreen = CGPoint(x: 0, y: 220)
 
         // Loop through all the child nodes in the scene
         for node in children {

@@ -28,6 +28,7 @@ extension CustomFocusableButton {
         button.setTitleColor(.white, for: .normal)
         button.setBackgroundImage(UIImage(named: "buttonbackground"), for: .normal)
         button.setBackgroundImage(UIImage(named: "buttonbackgroundfocused"), for: .focused)
+        button.adjustsImageWhenHighlighted = true
         button.backgroundColor = .none
         button.layer.cornerRadius = 10
         button.translatesAutoresizingMaskIntoConstraints = false

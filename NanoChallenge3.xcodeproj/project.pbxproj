@@ -454,6 +454,7 @@
 				DEVELOPMENT_TEAM = MH2BSYHQQX;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "NanoChallenge3-tvOS-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Trash Catcher";
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
@@ -483,6 +484,7 @@
 				DEVELOPMENT_TEAM = MH2BSYHQQX;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "NanoChallenge3-tvOS-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Trash Catcher";
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
@@ -512,7 +514,7 @@
 				DEVELOPMENT_TEAM = MH2BSYHQQX;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "NanoChallenge3-iOS/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = TrashCatcher;
+				INFOPLIST_KEY_CFBundleDisplayName = "Trash Catcher";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -543,7 +545,7 @@
 				DEVELOPMENT_TEAM = MH2BSYHQQX;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "NanoChallenge3-iOS/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = TrashCatcher;
+				INFOPLIST_KEY_CFBundleDisplayName = "Trash Catcher";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
