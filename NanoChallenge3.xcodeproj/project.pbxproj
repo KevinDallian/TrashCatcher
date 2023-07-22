@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		681629492A6BF529003F7D26 /* LocalDeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681629482A6BF529003F7D26 /* LocalDeviceManager.swift */; };
+		6816294A2A6BF529003F7D26 /* LocalDeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681629482A6BF529003F7D26 /* LocalDeviceManager.swift */; };
+		681629532A6BF830003F7D26 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681629512A6BF830003F7D26 /* CameraView.swift */; };
+		681629552A6BF869003F7D26 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681629542A6BF869003F7D26 /* CameraViewController.swift */; };
+		681629572A6BF878003F7D26 /* HandGestureProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681629562A6BF878003F7D26 /* HandGestureProcessor.swift */; };
+		68FB2BAD2A6C0AFC00B9642E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68FB2BAC2A6C0AFC00B9642E /* SceneDelegate.swift */; };
 		D80917CA2A657301007593A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80917C92A657301007593A4 /* AppDelegate.swift */; };
 		D80917CC2A657301007593A4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80917CB2A657301007593A4 /* ViewController.swift */; };
 		D80917CF2A657301007593A4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D80917CD2A657301007593A4 /* Main.storyboard */; };
@@ -18,7 +24,6 @@
 		D83666092A67146E0051EA5B /* GarbageNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83666082A67146E0051EA5B /* GarbageNode.swift */; };
 		D84497032A6665A1001BEBE9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84497022A6665A1001BEBE9 /* AppDelegate.swift */; };
 		D84497052A6665A1001BEBE9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84497042A6665A1001BEBE9 /* SceneDelegate.swift */; };
-		D84497072A6665A1001BEBE9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84497062A6665A1001BEBE9 /* ViewController.swift */; };
 		D844970A2A6665A1001BEBE9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D84497082A6665A1001BEBE9 /* Main.storyboard */; };
 		D844970C2A6665A2001BEBE9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D844970B2A6665A2001BEBE9 /* Assets.xcassets */; };
 		D844970F2A6665A2001BEBE9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D844970D2A6665A2001BEBE9 /* LaunchScreen.storyboard */; };
@@ -29,6 +34,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		681629482A6BF529003F7D26 /* LocalDeviceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDeviceManager.swift; sourceTree = "<group>"; };
+		681629512A6BF830003F7D26 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		681629542A6BF869003F7D26 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		681629562A6BF878003F7D26 /* HandGestureProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandGestureProcessor.swift; sourceTree = "<group>"; };
+		68FB2BAC2A6C0AFC00B9642E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		D80917C62A657301007593A4 /* NanoChallenge3-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NanoChallenge3-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D80917C92A657301007593A4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D80917CB2A657301007593A4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -42,7 +52,6 @@
 		D84497002A6665A1001BEBE9 /* NanoChallenge3-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NanoChallenge3-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D84497022A6665A1001BEBE9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D84497042A6665A1001BEBE9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		D84497062A6665A1001BEBE9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		D84497092A6665A1001BEBE9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D844970B2A6665A2001BEBE9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D844970E2A6665A2001BEBE9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -77,6 +86,7 @@
 		D80917BD2A657301007593A4 = {
 			isa = PBXGroup;
 			children = (
+				681629482A6BF529003F7D26 /* LocalDeviceManager.swift */,
 				D8CC8E8B2A6AD537002FBA67 /* NanoChallenge3-tvOS-Info.plist */,
 				D80917C82A657301007593A4 /* NanoChallenge3 */,
 				D84497012A6665A1001BEBE9 /* NanoChallenge3-iOS */,
@@ -105,6 +115,7 @@
 				D80917CD2A657301007593A4 /* Main.storyboard */,
 				D80917D02A657302007593A4 /* Assets.xcassets */,
 				D80917D22A657302007593A4 /* LaunchScreen.storyboard */,
+				68FB2BAC2A6C0AFC00B9642E /* SceneDelegate.swift */,
 			);
 			path = NanoChallenge3;
 			sourceTree = "<group>";
@@ -130,11 +141,13 @@
 			children = (
 				D84497022A6665A1001BEBE9 /* AppDelegate.swift */,
 				D84497042A6665A1001BEBE9 /* SceneDelegate.swift */,
-				D84497062A6665A1001BEBE9 /* ViewController.swift */,
 				D84497082A6665A1001BEBE9 /* Main.storyboard */,
 				D844970B2A6665A2001BEBE9 /* Assets.xcassets */,
 				D844970D2A6665A2001BEBE9 /* LaunchScreen.storyboard */,
 				D84497102A6665A2001BEBE9 /* Info.plist */,
+				681629512A6BF830003F7D26 /* CameraView.swift */,
+				681629542A6BF869003F7D26 /* CameraViewController.swift */,
+				681629562A6BF878003F7D26 /* HandGestureProcessor.swift */,
 			);
 			path = "NanoChallenge3-iOS";
 			sourceTree = "<group>";
@@ -271,8 +284,10 @@
 			files = (
 				D821579D2A693602004650C5 /* PopUpView.swift in Sources */,
 				D821579F2A69396A004650C5 /* CustomFocusableButton.swift in Sources */,
+				681629492A6BF529003F7D26 /* LocalDeviceManager.swift in Sources */,
 				D84ABF662A66DCA80044FFFE /* BinNode.swift in Sources */,
 				D80917CC2A657301007593A4 /* ViewController.swift in Sources */,
+				68FB2BAD2A6C0AFC00B9642E /* SceneDelegate.swift in Sources */,
 				D84497202A669FAD001BEBE9 /* GameViewController.swift in Sources */,
 				D83666092A67146E0051EA5B /* GarbageNode.swift in Sources */,
 				D84ABF632A66D6970044FFFE /* GameScene.swift in Sources */,
@@ -284,9 +299,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D84497072A6665A1001BEBE9 /* ViewController.swift in Sources */,
+				6816294A2A6BF529003F7D26 /* LocalDeviceManager.swift in Sources */,
 				D84497032A6665A1001BEBE9 /* AppDelegate.swift in Sources */,
+				681629532A6BF830003F7D26 /* CameraView.swift in Sources */,
 				D84497052A6665A1001BEBE9 /* SceneDelegate.swift in Sources */,
+				681629572A6BF878003F7D26 /* HandGestureProcessor.swift in Sources */,
+				681629552A6BF869003F7D26 /* CameraViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -451,7 +469,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = MH2BSYHQQX;
+				DEVELOPMENT_TEAM = 6P48RXXD7X;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "NanoChallenge3-tvOS-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Trash Catcher";
@@ -481,7 +499,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = MH2BSYHQQX;
+				DEVELOPMENT_TEAM = 6P48RXXD7X;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "NanoChallenge3-tvOS-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Trash Catcher";
@@ -511,10 +529,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = MH2BSYHQQX;
+				DEVELOPMENT_TEAM = 6P48RXXD7X;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "NanoChallenge3-iOS/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Trash Catcher";
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app asks permission to use camera";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -542,10 +561,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = MH2BSYHQQX;
+				DEVELOPMENT_TEAM = 6P48RXXD7X;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "NanoChallenge3-iOS/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Trash Catcher";
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app asks permission to use camera";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
