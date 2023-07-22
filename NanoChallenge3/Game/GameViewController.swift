@@ -19,8 +19,8 @@ class GameViewController: UIViewController, ScoreDelegate {
     let restartButton = CustomFocusableButton().createButton(title: "Play Again", fontSize: 40)
     
     //MARK: Timer Variable
-    let gameDuration : TimeInterval = 60
-    var remainingSeconds : TimeInterval = 60
+    let gameDuration : TimeInterval = 5
+    var remainingSeconds : TimeInterval = 5
     var timer : Timer?
     var timerLabel : UILabel?
     var rectangleBar: UIView!
@@ -175,7 +175,7 @@ class GameViewController: UIViewController, ScoreDelegate {
     //MARK: Popup
     private func showPopup() {
         // Create the popup view and customize it if needed
-        popupView = PopUpView(frame: CGRect(x: 0, y: 0, width: 906, height: 466))
+        popupView = PopUpView(frame: CGRect(x: 0, y: 0, width: 1092, height: 538))
         popupView?.center = view.center
         popupView?.setupScore(score: score)
         if let popupView = popupView {
@@ -187,6 +187,9 @@ class GameViewController: UIViewController, ScoreDelegate {
         self.view.addSubview(restartButton)
         
         NSLayoutConstraint.activate([
+            popupView!.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            popupView!.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            
             restartButton.topAnchor.constraint(equalTo: popupView!.bottomAnchor, constant: 20),
             restartButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -150),
 

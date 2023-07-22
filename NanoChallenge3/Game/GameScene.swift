@@ -55,7 +55,7 @@ class GameScene : SKScene, SKPhysicsContactDelegate{
     
     //MARK: Setup Bin
     private func setupBin(){
-        binNode.position = CGPoint(x: frame.midX, y: frame.minY + 250   )
+        binNode.position = CGPoint(x: frame.midX, y: frame.minY + 255)
         binNode.physicsBody = SKPhysicsBody(rectangleOf: binNode.size)
         binNode.physicsBody?.isDynamic = false
         
