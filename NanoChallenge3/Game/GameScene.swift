@@ -14,7 +14,7 @@ class GameScene : SKScene, SKPhysicsContactDelegate{
     
     // Constant for moving binNode
     let movePoints = 180.0
-    
+
     var scoreDelegate : ScoreDelegate?
     
     override func didMove(to view: SKView) {
@@ -28,11 +28,8 @@ class GameScene : SKScene, SKPhysicsContactDelegate{
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
-        // Check if binNode and garbageNode collide
         if (contact.bodyA.categoryBitMask == 1 && contact.bodyB.categoryBitMask == 2) ||
            (contact.bodyA.categoryBitMask == 2 && contact.bodyB.categoryBitMask == 1) {
-            // Collision detected between binNode and garbageNode
-            // Handle adding score points and removing garbageNode here
             handleCollision(contact)
         }
     }
@@ -48,12 +45,16 @@ class GameScene : SKScene, SKPhysicsContactDelegate{
         
         let scaledSize = CGSize(width: sceneAspectRatio.width * scale, height: sceneAspectRatio.height * scale)
         self.size = scaledSize
-        self.backgroundColor = .systemIndigo
+        let background = SKSpriteNode(imageNamed: "background")
+        background.position = CGPoint(x: frame.midX, y: frame.midY)
+        background.zPosition = -1
+        background.size = scaledSize
+        addChild(background)
     }
     
     //MARK: Setup Bin
     private func setupBin(){
-        binNode.position = CGPoint(x: frame.midX, y: frame.minY)
+        binNode.position = CGPoint(x: frame.midX, y: frame.minY + 150)
         binNode.physicsBody = SKPhysicsBody(rectangleOf: binNode.size)
         binNode.physicsBody?.isDynamic = false
         
@@ -94,6 +95,9 @@ class GameScene : SKScene, SKPhysicsContactDelegate{
         if binNode.position.x - movePoints >= frame.minX {
             binNode.run(moveLeftAction)
         }
+        let texture = SKTexture(imageNamed: switchCharacterPosition(characterPosition: .right, character: binNode.imageUrl))
+        binNode.run(SKAction.setTexture(texture))
+        
     }
     
     public func swipeRight(){
@@ -101,6 +105,8 @@ class GameScene : SKScene, SKPhysicsContactDelegate{
         if binNode.position.x + movePoints <= frame.maxX {
             binNode.run(moveRightAction)
         }
+        let texture = SKTexture(imageNamed: switchCharacterPosition(characterPosition: .left, character: binNode.imageUrl))
+        binNode.run(SKAction.setTexture(texture))
     }
     
     //MARK: Collision
