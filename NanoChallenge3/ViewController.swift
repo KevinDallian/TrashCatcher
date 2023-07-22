@@ -15,7 +15,7 @@ class ViewController: UIViewController {
     private var textRaiseHand: UILabel!
     private var playButton: UIButton!
     let startButton = CustomFocusableButton().createButton(title: "Start Game", fontSize: 40)
-    var soundButton =  CustomFocusableButton().createButton(title: "Sound" , fontSize: 40)
+    var soundButton = CustomFocusableButton().createButton(title: "sound_on" , fontSize: 40)
     var audioPlayer: AVAudioPlayer?
     var isSoundOn = true
 
