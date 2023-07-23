@@ -15,8 +15,9 @@ class GameScene : SKScene, SKPhysicsContactDelegate{
     // Constant for moving binNode
     let movePoints = 180.0
     let backgroundimage = "gamebackground"
-
+    
     var scoreDelegate : ScoreDelegate?
+    
     
     override func didMove(to view: SKView) {
         // gravity and detect collision
@@ -26,11 +27,12 @@ class GameScene : SKScene, SKPhysicsContactDelegate{
         setupBackground(to: view)
         setupBin()
         loopSpawnGarbage()
+        
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
         if (contact.bodyA.categoryBitMask == 1 && contact.bodyB.categoryBitMask == 2) ||
-           (contact.bodyA.categoryBitMask == 2 && contact.bodyB.categoryBitMask == 1) {
+            (contact.bodyA.categoryBitMask == 2 && contact.bodyB.categoryBitMask == 1) {
             handleCollision(contact)
         }
     }
@@ -50,7 +52,25 @@ class GameScene : SKScene, SKPhysicsContactDelegate{
         background.position = CGPoint(x: frame.midX, y: frame.midY)
         background.zPosition = -1
         background.size = scaledSize
+        background.alpha = 0.35
         addChild(background)
+//
+//        // Fade in animation for 3 seconds
+//        let fadeInAction = SKAction.fadeAlpha(to: 1, duration: 3.0)
+//        // Fade out animation to revert to original opacity
+//        let fadeOutAction = SKAction.fadeAlpha(to: 1.0, duration: 0.1)
+//        // Sequence both actions
+//        let fadeSequence = SKAction.sequence([fadeInAction, fadeOutAction])
+//
+//        // Run the sequence on the background node
+//        background.run(fadeSequence)
+        
+        // Fade in animation for 3 seconds
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+            let fadeInAction = SKAction.fadeAlpha(to: 1, duration: 2.0)
+            background.run(fadeInAction)
+        }
+       
     }
     
     //MARK: Setup Bin
@@ -64,6 +84,9 @@ class GameScene : SKScene, SKPhysicsContactDelegate{
         binNode.physicsBody?.contactTestBitMask = 2 // Contact will be detected with bit mask 2 (garbageNodea)
         addChild(binNode)
     }
+    
+    
+    
     
     //MARK: Garbage Spawning
     private func spawnGarbage(){
@@ -115,6 +138,7 @@ class GameScene : SKScene, SKPhysicsContactDelegate{
         // get garbageNode that collides
         if let garbageNode = contact.bodyA.node as? GarbageNode ?? contact.bodyB.node as? GarbageNode {
             garbageNode.removeFromParent()
+            
             scoreDelegate?.addScore()
         }
     }
@@ -123,7 +147,7 @@ class GameScene : SKScene, SKPhysicsContactDelegate{
     private func removeGarbageNodesBelowScreen() {
         // Get the bottom position of the screen (y = 0 in SpriteKit coordinate system)
         let bottomOfScreen = CGPoint(x: 0, y: 220)
-
+        
         // Loop through all the child nodes in the scene
         for node in children {
             // Check if the node is a GarbageNode and its position is below the screen

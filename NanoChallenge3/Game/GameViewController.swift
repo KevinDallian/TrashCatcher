@@ -7,6 +7,7 @@
 
 import UIKit
 import SpriteKit
+import AVFoundation
 
 class GameViewController: UIViewController, ScoreDelegate {
     //MARK: Gameplay Variables
@@ -27,12 +28,43 @@ class GameViewController: UIViewController, ScoreDelegate {
     var rectangleBarWidthConstraint: NSLayoutConstraint!
     var widthAnimator: UIViewPropertyAnimator?
     
+    private let personImageView: UIImageView = {
+        let imageView = UIImageView(image: UIImage(named: "person"))
+        imageView.contentMode = .scaleAspectFill
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    //Audio
+    var audioPlayerBackground: AVAudioPlayer?
+    var audioPlayer: AVAudioPlayer?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSKView()
         setupSwipedGestureRecognizer()
         setupHUD()
+        setupPersonImageView()
+        hidePersonImageViewAfterDelay(3.0)
+        
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setupAudioBackground(resourceName: "Gameplay", ofType: "mp3", shouldLoop: true, volume: 0.2)
+        // Check if the audio player is available and play the audio
+        if let player = audioPlayerBackground {
+            player.play()
+        }
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+            super.viewWillDisappear(animated)
+
+            // Stop the audio player when the view disappears
+            audioPlayerBackground?.stop()
+        }
+    
+    
     
     //MARK: SKView
     private func setupSKView(){
@@ -44,6 +76,7 @@ class GameViewController: UIViewController, ScoreDelegate {
         skView.presentScene(gameScene)
         
     }
+    
     
     //MARK: SwipeGestureRecognizer
     func setupSwipedGestureRecognizer() {
@@ -66,29 +99,45 @@ class GameViewController: UIViewController, ScoreDelegate {
     
     //MARK: HUD
     func setupHUD(){
+        
+        let whiteBackground = UIView()
+          whiteBackground.backgroundColor = UIColor.white.withAlphaComponent(0.3)
+          whiteBackground.translatesAutoresizingMaskIntoConstraints = false
+          whiteBackground.layer.cornerRadius = 24
+          view.addSubview(whiteBackground)
+
+   
+        NSLayoutConstraint.activate([
+            whiteBackground.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -35),
+            whiteBackground.topAnchor.constraint(equalTo: view.topAnchor, constant: 68),
+            whiteBackground.widthAnchor.constraint(equalToConstant: 397),
+            whiteBackground.heightAnchor.constraint(equalToConstant: 141)
+        ])
+        
+        let fontName = "BubblegumSans-Regular"
         scoreLabel = UILabel(frame: CGRect(x: view.bounds.maxX - 118, y: view.bounds.minY + 109, width: 100, height: 100))
         scoreLabel?.text = String(score)
-        scoreLabel?.textColor = .white
-        scoreLabel?.font = UIFont.systemFont(ofSize: 40)
+        scoreLabel?.textColor = .black
+        scoreLabel?.font = UIFont(name: fontName, size: 40) ?? .systemFont(ofSize: 40)
         self.view.addSubview(scoreLabel!)
         
         //MARK: Score
         let scoreCaption = UILabel(frame: CGRect(x: view.bounds.maxX - 374, y: view.bounds.minY + 109, width: 200, height: 100))
         scoreCaption.text = "Score"
-        scoreCaption.textColor = .white
-        scoreCaption.font = UIFont.systemFont(ofSize: 40)
+        scoreCaption.textColor = .black
+        scoreCaption.font = UIFont(name: fontName, size: 40) ?? .systemFont(ofSize: 40)
         self.view.addSubview(scoreCaption)
         
         let highScoreCaption = UILabel(frame: CGRect(x: view.bounds.maxX - 374, y: view.bounds.minY + 62, width: 200, height: 100))
         highScoreCaption.text = "Highest Score"
-        highScoreCaption.textColor = UIColor(named: "Gray")
-        highScoreCaption.font = UIFont.systemFont(ofSize: 24)
+        highScoreCaption.textColor = .black.withAlphaComponent(0.5)
+        highScoreCaption.font = UIFont(name: fontName, size: 24) ?? .systemFont(ofSize: 24)
         self.view.addSubview(highScoreCaption)
         
         highScoreLabel = UILabel(frame: CGRect(x: view.bounds.maxX - 118, y: view.bounds.minY + 62, width: 100, height: 100))
         highScoreLabel?.text = String(UserDefaults.standard.integer(forKey: "highscore"))
-        highScoreLabel?.textColor = UIColor(named: "Gray")
-        highScoreLabel?.font = UIFont.systemFont(ofSize: 24)
+        highScoreLabel?.textColor = .black.withAlphaComponent(0.5)
+        highScoreLabel?.font = UIFont(name: fontName, size: 24) ?? .systemFont(ofSize: 24)
         self.view.addSubview(highScoreLabel!)
         
         //MARK: RectangleBar
@@ -102,7 +151,7 @@ class GameViewController: UIViewController, ScoreDelegate {
         grayBar.layer.cornerRadius = 10
         view.addSubview(grayBar)
         view.addSubview(rectangleBar)
-    
+        
         rectangleBarWidthConstraint = rectangleBar.widthAnchor.constraint(equalToConstant: 400)
         rectangleBarWidthConstraint.isActive = true
         
@@ -118,14 +167,18 @@ class GameViewController: UIViewController, ScoreDelegate {
         ])
         
         //MARK: Timer
-        let timerCaption = UILabel(frame: CGRect(x: view.bounds.minX + 380, y: view.bounds.minY + 10, width: 100, height: 100))
+       
+        let timerCaption = UILabel(frame: CGRect(x: view.bounds.minX + 64, y: view.bounds.minY + 10, width: 200, height: 100))
+        
         timerCaption.text = "Timer"
-        timerCaption.font = .systemFont(ofSize: 32)
+        timerCaption.textColor = .black
+        timerCaption.font =  UIFont(name: fontName, size: 40) ?? .systemFont(ofSize: 40)
+        
         self.view.addSubview(timerCaption)
         timerLabel = UILabel(frame: CGRect(x: view.bounds.minX + 398, y: view.bounds.minY + 60, width: 100, height: 100))
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
         timerLabel?.text = String(format: "0:%.0f", remainingSeconds)
-        timerLabel?.font = UIFont.systemFont(ofSize: 25)
+        timerLabel?.font = UIFont(name: fontName, size: 25) ?? .systemFont(ofSize: 50)
         timerLabel?.textColor = .black
         self.view.addSubview(timerLabel!)
         
@@ -135,7 +188,7 @@ class GameViewController: UIViewController, ScoreDelegate {
     @objc func updateTimer(){
         // Decrement the remaining seconds by 1
         remainingSeconds -= 1
-
+        
         // Check if the timer has reached 0 (or below) to stop the timer
         if remainingSeconds <= 0 {
             widthAnimator?.stopAnimation(true)
@@ -147,7 +200,7 @@ class GameViewController: UIViewController, ScoreDelegate {
         }
         
         let progress = remainingSeconds / gameDuration // Calculate the progress from 1.0 to 0
-
+        
         // Update the width constraint of the rectangle bar based on the progress
         rectangleBarWidthConstraint.constant = progress * 400
         widthAnimator = UIViewPropertyAnimator(duration: 1.0, curve: .linear, animations: {
@@ -192,22 +245,35 @@ class GameViewController: UIViewController, ScoreDelegate {
             
             restartButton.topAnchor.constraint(equalTo: popupView!.bottomAnchor, constant: 20),
             restartButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -150),
-
+            restartButton.widthAnchor.constraint(equalToConstant: 300),
+            restartButton.heightAnchor.constraint(equalToConstant: 100),
+            
             dismissButton.topAnchor.constraint(equalTo: popupView!.bottomAnchor, constant: 20),
             dismissButton.leadingAnchor.constraint(equalTo: restartButton.trailingAnchor, constant: 50),
             dismissButton.bottomAnchor.constraint(equalTo: restartButton.bottomAnchor),
+            dismissButton.heightAnchor.constraint(equalToConstant: 100),
+            dismissButton.widthAnchor.constraint(equalToConstant: 300)
+            
         ])
         
     }
     
     //MARK: Buttons
-    
     @objc private func dismissButtonTapped() {
+        // Play the "Button click" audio
+        setupAudio(resourceName: "Button Click", ofType: "mp3", shouldLoop: false, volume: 1.0)
+        audioPlayer?.play()
+        
+
         highScoreLabel?.text = String(UserDefaults.standard.integer(forKey: "highscore"))
         dismiss(animated: true, completion: nil)
     }
     
     @objc private func restartButtonTapped() {
+        // Play the "Button click" audio
+        setupAudio(resourceName: "Button Click", ofType: "mp3", shouldLoop: false, volume: 1.0)
+        audioPlayer?.play()
+        
         popupView?.removeFromSuperview()
         score = 0
         remainingSeconds = gameDuration
@@ -216,13 +282,59 @@ class GameViewController: UIViewController, ScoreDelegate {
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
         restartButton.removeFromSuperview()
         dismissButton.removeFromSuperview()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.setupAudioBackground(resourceName: "Gameplay", ofType: "mp3", shouldLoop: false, volume: 0.2)
+            self.audioPlayerBackground?.play()
+        }
+       
     }
     
     func addScore() {
+        // Play the "Button click" audio
+        if audioPlayerBackground!.isPlaying {
+            audioPlayerBackground!.pause()
+        }
+        
+        setupAudio(resourceName: "Item Collected", ofType: "mp3", shouldLoop: false, volume: 1.0)
+        audioPlayer?.play()
         score += 1
         scoreLabel?.text = String(score)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            if !self.audioPlayerBackground!.isPlaying {
+                self.audioPlayerBackground!.play()
+            }
+        }
     }
-
+    
+    func setupPersonImageView() {
+        view.addSubview(personImageView)
+        
+        NSLayoutConstraint.activate([
+            personImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            personImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            personImageView.widthAnchor.constraint(equalToConstant: 657),
+            personImageView.heightAnchor.constraint(equalToConstant: 640)
+        ])
+    }
+    
+    func hidePersonImageViewAfterDelay(_ delay: TimeInterval) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) { [weak self] in
+            guard let self = self else { return }
+            UIView.animate(withDuration: 0.5, animations: {
+                self.personImageView.alpha = 0.0 // Set alpha to 0 to hide the image
+            }) { (_) in
+                self.personImageView.removeFromSuperview() // Remove the imageView from its superview
+            }
+        }
+    }
+    
+    func setupAudioBackground(resourceName:String, ofType:String, shouldLoop:Bool, volume: Float){
+        audioPlayerBackground = AVAudioPlayer.setupAudioPlayer(resourceName: resourceName, ofType: ofType, shouldLoop: shouldLoop, volume: volume)
+    }
+    func setupAudio(resourceName:String, ofType:String, shouldLoop:Bool, volume: Float){
+        audioPlayer = AVAudioPlayer.setupAudioPlayer(resourceName: resourceName, ofType: ofType, shouldLoop: shouldLoop, volume: volume)
+    }
 }
 
 //MARK: Protocols

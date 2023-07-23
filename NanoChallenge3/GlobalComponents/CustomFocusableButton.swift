@@ -43,15 +43,26 @@ class CustomFocusableButton : UIButton {
 
 extension CustomFocusableButton {
     func createButton(title: String, fontSize: Int) -> CustomFocusableButton {
-        let button = CustomFocusableButton(type: .system)
-        button.setTitle(title, for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: CGFloat(fontSize))
-        button.setTitleColor(.white, for: .normal)
-        button.setBackgroundImage(UIImage(named: "buttonbackground"), for: .normal)
-        button.setBackgroundImage(UIImage(named: "buttonbackgroundfocused"), for: .focused)
-        button.adjustsImageWhenDisabled = false
-        button.adjustsImageWhenHighlighted = false
-        button.contentMode = .scaleAspectFill
+        let button = CustomFocusableButton(type: .custom)
+        if title == "New Game"{
+            button.setBackgroundImage(UIImage(named: "newgame"), for: .normal)
+            button.setBackgroundImage(UIImage(named: "newgamefocused"), for: .focused)
+        }else if title == "Start Game"{
+            button.setBackgroundImage(UIImage(named: "startgame"), for: .normal)
+            button.setBackgroundImage(UIImage(named: "startgamefocused"), for: .focused)
+        }else if title == "sound_on"{
+            button.setBackgroundImage(UIImage(named: "soundon"), for: .normal)
+            button.setBackgroundImage(UIImage(named: "soundonfocussed"), for: .focused)
+        }
+        else if title == "sound_off"{
+            button.setBackgroundImage(UIImage(named: "soundoff"), for: .normal)
+            button.setBackgroundImage(UIImage(named: "soundoffocussed"), for: .focused)
+        }
+        else {
+            button.setBackgroundImage(UIImage(named: "playagain"), for: .normal)
+            button.setBackgroundImage(UIImage(named: "playagainfocused"), for: .focused)
+        }
+        button.contentMode = .scaleAspectFit
         button.backgroundColor = .clear
         button.layer.cornerRadius = 10
         button.translatesAutoresizingMaskIntoConstraints = false
