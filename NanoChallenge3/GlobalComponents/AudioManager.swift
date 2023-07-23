@@ -42,6 +42,7 @@ class AudioManager {
     func pauseBackground(){
         audioPlayerBackground.pause()
     }
+    
 }
 
 enum AudioType{
