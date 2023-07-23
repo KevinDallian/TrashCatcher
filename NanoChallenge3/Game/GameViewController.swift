@@ -8,6 +8,8 @@
 import UIKit
 import SpriteKit
 import AVFoundation
+import Combine
+import DeviceDiscoveryUI
 
 class GameViewController: UIViewController, ScoreDelegate {
     //MARK: Gameplay Variables
@@ -20,13 +22,21 @@ class GameViewController: UIViewController, ScoreDelegate {
     let restartButton = CustomFocusableButton().createButton(title: "Play Again", fontSize: 40)
     
     //MARK: Timer Variable
-    let gameDuration : TimeInterval = 5
-    var remainingSeconds : TimeInterval = 5
+    let gameDuration : TimeInterval = 60
+    var remainingSeconds : TimeInterval = 60
     var timer : Timer?
     var timerLabel : UILabel?
     var rectangleBar: UIView!
     var rectangleBarWidthConstraint: NSLayoutConstraint!
     var widthAnimator: UIViewPropertyAnimator?
+    var positionPoint : Float!
+    
+    var localDeviceManager = LocalDeviceManager(applicationService: "trashCatcher", didReceiveMessage: { data in
+        guard let string = String(data: data, encoding: .utf8) else { return }
+    }, errorHandler: { error in
+        NSLog("ERROR: \(error)")
+    })
+    
     
     private let personImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "person"))
@@ -36,33 +46,31 @@ class GameViewController: UIViewController, ScoreDelegate {
     }()
     
     //Audio
-    var audioPlayerBackground: AVAudioPlayer?
-    var audioPlayer: AVAudioPlayer?
-    
+    var audioManager = AudioManager.shared
+//    var audioPlayerBackground: AVAudioPlayer?
+//    var audioPlayer: AVAudioPlayer?
+    //MARK: ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupSKView()
-        setupSwipedGestureRecognizer()
-        setupHUD()
-        setupPersonImageView()
-        hidePersonImageViewAfterDelay(3.0)
-        
+        connectIOS()
+        localDeviceManager.didReceiveMessage = messageReceivedFromManager(_:)
+        audioManager.setupAudio(resourceName: "Item Collected", audioType: .soundtrack, ofType: "mp3", shouldLoop: false, volume: 0.1)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        setupAudioBackground(resourceName: "Gameplay", ofType: "mp3", shouldLoop: true, volume: 0.2)
-        // Check if the audio player is available and play the audio
-        if let player = audioPlayerBackground {
-            player.play()
+        if !audioManager.isMuted {
+            audioManager.setupAudio(resourceName: "Gameplay", audioType: .background, ofType: "mp3", shouldLoop: true, volume: 0.1)
+            audioManager.playSound(audioType: .background)
         }
     }
-    override func viewWillDisappear(_ animated: Bool) {
-            super.viewWillDisappear(animated)
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
 
-            // Stop the audio player when the view disappears
-            audioPlayerBackground?.stop()
-        }
+        gameScene?.stopLoopSpawnGarbage()
+        audioManager.stopBackground()
+        gameScene = nil
+    }
     
     
     
@@ -99,7 +107,6 @@ class GameViewController: UIViewController, ScoreDelegate {
     
     //MARK: HUD
     func setupHUD(){
-        
         let whiteBackground = UIView()
           whiteBackground.backgroundColor = UIColor.white.withAlphaComponent(0.3)
           whiteBackground.translatesAutoresizingMaskIntoConstraints = false
@@ -228,6 +235,7 @@ class GameViewController: UIViewController, ScoreDelegate {
     //MARK: Popup
     private func showPopup() {
         // Create the popup view and customize it if needed
+        gameScene?.stopLoopSpawnGarbage()
         popupView = PopUpView(frame: CGRect(x: 0, y: 0, width: 1092, height: 538))
         popupView?.center = view.center
         popupView?.setupScore(score: score)
@@ -262,9 +270,12 @@ class GameViewController: UIViewController, ScoreDelegate {
     //MARK: Buttons
     @objc private func dismissButtonTapped() {
         // Play the "Button click" audio
-        setupAudio(resourceName: "Button Click", ofType: "mp3", shouldLoop: false, volume: 1.0)
-        audioPlayer?.play()
-        
+//        setupAudio(resourceName: "Button Click", ofType: "mp3", shouldLoop: false, volume: 1.0)
+//        audioPlayer?.play()
+        if !audioManager.isMuted {
+            audioManager.setupAudio(resourceName: "Button Click", audioType: .soundtrack, ofType: "mp3", shouldLoop: false, volume: 1.0)
+            audioManager.playSound(audioType: .soundtrack)
+        }
 
         highScoreLabel?.text = String(UserDefaults.standard.integer(forKey: "highscore"))
         dismiss(animated: true, completion: nil)
@@ -272,9 +283,10 @@ class GameViewController: UIViewController, ScoreDelegate {
     
     @objc private func restartButtonTapped() {
         // Play the "Button click" audio
-        setupAudio(resourceName: "Button Click", ofType: "mp3", shouldLoop: false, volume: 1.0)
-        audioPlayer?.play()
-        
+        if !audioManager.isMuted {
+            audioManager.setupAudio(resourceName: "Button Click", audioType: .soundtrack, ofType: "mp3", shouldLoop: false, volume: 1.0)
+            audioManager.playSound(audioType: .soundtrack)
+        }
         popupView?.removeFromSuperview()
         score = 0
         remainingSeconds = gameDuration
@@ -283,31 +295,25 @@ class GameViewController: UIViewController, ScoreDelegate {
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
         restartButton.removeFromSuperview()
         dismissButton.removeFromSuperview()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.setupAudioBackground(resourceName: "Gameplay", ofType: "mp3", shouldLoop: false, volume: 0.2)
-            self.audioPlayerBackground?.play()
-        }
        
     }
     
     func addScore() {
-        // Play the "Button click" audio
-        if audioPlayerBackground!.isPlaying {
-            audioPlayerBackground!.pause()
+        if !audioManager.isMuted {
+            audioManager.pauseBackground()
+            audioManager.playSound(audioType: .soundtrack)
         }
         
-        setupAudio(resourceName: "Item Collected", ofType: "mp3", shouldLoop: false, volume: 1.0)
-        audioPlayer?.play()
         score += 1
         scoreLabel?.text = String(score)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-            if !self.audioPlayerBackground!.isPlaying {
-                self.audioPlayerBackground!.play()
+        if !audioManager.isMuted{
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.001) {
+                self.audioManager.playSound(audioType: .background)
             }
         }
     }
-    
+    //MARK: Overlay
     func setupPersonImageView() {
         view.addSubview(personImageView)
         
@@ -329,12 +335,66 @@ class GameViewController: UIViewController, ScoreDelegate {
             }
         }
     }
-    
-    func setupAudioBackground(resourceName:String, ofType:String, shouldLoop:Bool, volume: Float){
-        audioPlayerBackground = AVAudioPlayer.setupAudioPlayer(resourceName: resourceName, ofType: ofType, shouldLoop: shouldLoop, volume: volume)
+    //MARK: DeviceDiscoveryUI
+    func connectIOS() async {
+        let parameters = NWParameters.applicationService
+                
+        // Create the view controller for the endpoint picker.
+        if let devicePickerController =
+            DDDevicePickerViewController(browseDescriptor: NWBrowser.Descriptor.applicationService(name: "trashCatcher"), parameters: parameters){
+
+            // Show the network device picker as a full-screen, modal view.
+            devicePickerController.modalTransitionStyle = UIModalTransitionStyle.coverVertical
+            present(devicePickerController, animated: true, completion: nil)
+            
+            let endpoint: NWEndpoint
+            do {
+                endpoint = try await devicePickerController.endpoint
+            } catch {
+                // The user canceled the endpoint picker view.
+                return
+            }
+            localDeviceManager.connect(to: endpoint)
+            setupSpriteKit()
+        } else {
+        }
     }
-    func setupAudio(resourceName:String, ofType:String, shouldLoop:Bool, volume: Float){
-        audioPlayer = AVAudioPlayer.setupAudioPlayer(resourceName: resourceName, ofType: ofType, shouldLoop: shouldLoop, volume: volume)
+    
+    func connectIOS() {
+        Task {
+            await connectIOS()
+        }
+    }
+    
+    func messageReceivedFromManager(_ data: Data) {
+        let message = String(data: data, encoding: .utf8)
+        
+        if let floatValue = Float(message!) {
+            gameScene?.moveBinNode(xPosition: scaleValue(CGFloat(floatValue), fromRangeMin: 40, fromRangeMax: 800, toRangeMin: 0, toRangeMax: 1920))
+            print("\(floatValue)")
+        }else{ // Pinch
+//            print("Pinched")
+        }
+    }
+    // MARK: SetupSpriteKit
+    func setupSpriteKit(){
+        setupSKView()
+        setupSwipedGestureRecognizer()
+        setupHUD()
+        setupPersonImageView()
+        hidePersonImageViewAfterDelay(3.0)
+    }
+    
+    func scaleValue(_ value: CGFloat, fromRangeMin: CGFloat, fromRangeMax: CGFloat, toRangeMin: CGFloat, toRangeMax: CGFloat) -> CGFloat {
+        // Ensure the value is within the fromRange limits
+        let clampedValue = min(max(value, fromRangeMin), fromRangeMax)
+
+        // Calculate the scaled value
+        let fromRange = fromRangeMax - fromRangeMin
+        let toRange = toRangeMax - toRangeMin
+        let scaledValue = toRangeMin + ((clampedValue - fromRangeMin) / fromRange) * toRange
+
+        return scaledValue
     }
 }
 

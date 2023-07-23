@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		681629492A6BF529003F7D26 /* LocalDeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681629482A6BF529003F7D26 /* LocalDeviceManager.swift */; };
+		6816294A2A6BF529003F7D26 /* LocalDeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681629482A6BF529003F7D26 /* LocalDeviceManager.swift */; };
+		681629532A6BF830003F7D26 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681629512A6BF830003F7D26 /* CameraView.swift */; };
+		681629552A6BF869003F7D26 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681629542A6BF869003F7D26 /* CameraViewController.swift */; };
+		681629572A6BF878003F7D26 /* HandGestureProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681629562A6BF878003F7D26 /* HandGestureProcessor.swift */; };
+		68FB2BAD2A6C0AFC00B9642E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68FB2BAC2A6C0AFC00B9642E /* SceneDelegate.swift */; };
 		78E5CC4B2A6C0A2F0037E6EA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E5CC4A2A6C0A250037E6EA /* SceneDelegate.swift */; };
 		78E5CC4E2A6C0C330037E6EA /* BubblegumSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 78E5CC4D2A6C0C330037E6EA /* BubblegumSans-Regular.ttf */; };
 		78E5CC572A6C3B760037E6EA /* Button Click.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 78E5CC512A6C3B760037E6EA /* Button Click.mp3 */; };
@@ -15,19 +21,13 @@
 		78E5CC5A2A6C3B760037E6EA /* Game End.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 78E5CC542A6C3B760037E6EA /* Game End.mp3 */; };
 		78E5CC5B2A6C3B760037E6EA /* Start Menu.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 78E5CC552A6C3B760037E6EA /* Start Menu.mp3 */; };
 		78E5CC5C2A6C3B760037E6EA /* Item Collected.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 78E5CC562A6C3B760037E6EA /* Item Collected.mp3 */; };
-		78E5CC5F2A6C40170037E6EA /* Sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E5CC5E2A6C40170037E6EA /* Sound.swift */; };
-		681629492A6BF529003F7D26 /* LocalDeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681629482A6BF529003F7D26 /* LocalDeviceManager.swift */; };
-		6816294A2A6BF529003F7D26 /* LocalDeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681629482A6BF529003F7D26 /* LocalDeviceManager.swift */; };
-		681629532A6BF830003F7D26 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681629512A6BF830003F7D26 /* CameraView.swift */; };
-		681629552A6BF869003F7D26 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681629542A6BF869003F7D26 /* CameraViewController.swift */; };
-		681629572A6BF878003F7D26 /* HandGestureProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681629562A6BF878003F7D26 /* HandGestureProcessor.swift */; };
-		68FB2BAD2A6C0AFC00B9642E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68FB2BAC2A6C0AFC00B9642E /* SceneDelegate.swift */; };
 		D80917CA2A657301007593A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80917C92A657301007593A4 /* AppDelegate.swift */; };
 		D80917CC2A657301007593A4 /* DeviceDiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80917CB2A657301007593A4 /* DeviceDiscoveryViewController.swift */; };
 		D80917CF2A657301007593A4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D80917CD2A657301007593A4 /* Main.storyboard */; };
 		D80917D12A657302007593A4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D80917D02A657302007593A4 /* Assets.xcassets */; };
 		D80917D42A657302007593A4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D80917D22A657302007593A4 /* LaunchScreen.storyboard */; };
 		D80B50172A6A507B009D3F3E /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D80B50162A6A507B009D3F3E /* SwiftUI.framework */; };
+		D80EAB7D2A6D074F00524D7A /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80EAB7C2A6D074F00524D7A /* AudioManager.swift */; };
 		D821579D2A693602004650C5 /* PopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D821579C2A693602004650C5 /* PopUpView.swift */; };
 		D821579F2A69396A004650C5 /* CustomFocusableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D821579E2A69396A004650C5 /* CustomFocusableButton.swift */; };
 		D83666092A67146E0051EA5B /* GarbageNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83666082A67146E0051EA5B /* GarbageNode.swift */; };
@@ -40,9 +40,15 @@
 		D84ABF612A66D1DE0044FFFE /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84ABF602A66D1DD0044FFFE /* SpriteKit.framework */; };
 		D84ABF632A66D6970044FFFE /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84ABF622A66D6970044FFFE /* GameScene.swift */; };
 		D84ABF662A66DCA80044FFFE /* BinNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84ABF652A66DCA80044FFFE /* BinNode.swift */; };
+		D8CC8E8F2A6CEDFF002FBA67 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CC8E8E2A6CEDFF002FBA67 /* ViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		681629482A6BF529003F7D26 /* LocalDeviceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDeviceManager.swift; sourceTree = "<group>"; };
+		681629512A6BF830003F7D26 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		681629542A6BF869003F7D26 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		681629562A6BF878003F7D26 /* HandGestureProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandGestureProcessor.swift; sourceTree = "<group>"; };
+		68FB2BAC2A6C0AFC00B9642E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		78E5CC4A2A6C0A250037E6EA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		78E5CC4D2A6C0C330037E6EA /* BubblegumSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BubblegumSans-Regular.ttf"; sourceTree = "<group>"; };
 		78E5CC512A6C3B760037E6EA /* Button Click.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Button Click.mp3"; sourceTree = "<group>"; };
@@ -51,12 +57,6 @@
 		78E5CC542A6C3B760037E6EA /* Game End.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Game End.mp3"; sourceTree = "<group>"; };
 		78E5CC552A6C3B760037E6EA /* Start Menu.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Start Menu.mp3"; sourceTree = "<group>"; };
 		78E5CC562A6C3B760037E6EA /* Item Collected.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Item Collected.mp3"; sourceTree = "<group>"; };
-		78E5CC5E2A6C40170037E6EA /* Sound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
-		681629482A6BF529003F7D26 /* LocalDeviceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDeviceManager.swift; sourceTree = "<group>"; };
-		681629512A6BF830003F7D26 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
-		681629542A6BF869003F7D26 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
-		681629562A6BF878003F7D26 /* HandGestureProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandGestureProcessor.swift; sourceTree = "<group>"; };
-		68FB2BAC2A6C0AFC00B9642E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		D80917C62A657301007593A4 /* NanoChallenge3-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NanoChallenge3-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D80917C92A657301007593A4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D80917CB2A657301007593A4 /* DeviceDiscoveryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceDiscoveryViewController.swift; sourceTree = "<group>"; };
@@ -64,6 +64,7 @@
 		D80917D02A657302007593A4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D80917D32A657302007593A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D80B50162A6A507B009D3F3E /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS16.4.sdk/System/Library/Frameworks/SwiftUI.framework; sourceTree = DEVELOPER_DIR; };
+		D80EAB7C2A6D074F00524D7A /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
 		D821579C2A693602004650C5 /* PopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpView.swift; sourceTree = "<group>"; };
 		D821579E2A69396A004650C5 /* CustomFocusableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFocusableButton.swift; sourceTree = "<group>"; };
 		D83666082A67146E0051EA5B /* GarbageNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GarbageNode.swift; sourceTree = "<group>"; };
@@ -79,6 +80,7 @@
 		D84ABF622A66D6970044FFFE /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		D84ABF652A66DCA80044FFFE /* BinNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinNode.swift; sourceTree = "<group>"; };
 		D8CC8E8B2A6AD537002FBA67 /* NanoChallenge3-tvOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "NanoChallenge3-tvOS-Info.plist"; sourceTree = "<group>"; };
+		D8CC8E8E2A6CEDFF002FBA67 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,14 +124,6 @@
 			path = Audio;
 			sourceTree = "<group>";
 		};
-		78E5CC5D2A6C40080037E6EA /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				78E5CC5E2A6C40170037E6EA /* Sound.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
 		D80917BD2A657301007593A4 = {
 			isa = PBXGroup;
 			children = (
@@ -154,7 +148,6 @@
 		D80917C82A657301007593A4 /* NanoChallenge3 */ = {
 			isa = PBXGroup;
 			children = (
-				78E5CC5D2A6C40080037E6EA /* Extensions */,
 				78E5CC4F2A6C395D0037E6EA /* Audio */,
 				78E5CC4C2A6C0B860037E6EA /* Fonts */,
 				D80B50132A6A3AAB009D3F3E /* GlobalComponents */,
@@ -162,7 +155,7 @@
 				D84497142A666F99001BEBE9 /* Game */,
 				D80917C92A657301007593A4 /* AppDelegate.swift */,
 				78E5CC4A2A6C0A250037E6EA /* SceneDelegate.swift */,
-				D80917CB2A657301007593A4 /* ViewController.swift */,
+				D8CC8E8E2A6CEDFF002FBA67 /* ViewController.swift */,
 				D80917CB2A657301007593A4 /* DeviceDiscoveryViewController.swift */,
 				D80917CD2A657301007593A4 /* Main.storyboard */,
 				D80917D02A657302007593A4 /* Assets.xcassets */,
@@ -176,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				D821579E2A69396A004650C5 /* CustomFocusableButton.swift */,
+				D80EAB7C2A6D074F00524D7A /* AudioManager.swift */,
 			);
 			path = GlobalComponents;
 			sourceTree = "<group>";
@@ -341,15 +335,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8CC8E8F2A6CEDFF002FBA67 /* ViewController.swift in Sources */,
 				D821579D2A693602004650C5 /* PopUpView.swift in Sources */,
 				D821579F2A69396A004650C5 /* CustomFocusableButton.swift in Sources */,
 				78E5CC4B2A6C0A2F0037E6EA /* SceneDelegate.swift in Sources */,
 				D84ABF662A66DCA80044FFFE /* BinNode.swift in Sources */,
-				D80917CC2A657301007593A4 /* ViewController.swift in Sources */,
-				78E5CC5F2A6C40170037E6EA /* Sound.swift in Sources */,
+				D80917CC2A657301007593A4 /* DeviceDiscoveryViewController.swift in Sources */,
 				681629492A6BF529003F7D26 /* LocalDeviceManager.swift in Sources */,
 				D84ABF662A66DCA80044FFFE /* BinNode.swift in Sources */,
 				D80917CC2A657301007593A4 /* DeviceDiscoveryViewController.swift in Sources */,
+				D80EAB7D2A6D074F00524D7A /* AudioManager.swift in Sources */,
 				68FB2BAD2A6C0AFC00B9642E /* SceneDelegate.swift in Sources */,
 				D84497202A669FAD001BEBE9 /* GameViewController.swift in Sources */,
 				D83666092A67146E0051EA5B /* GarbageNode.swift in Sources */,
@@ -532,7 +527,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = ATHR44FBVZ;
+				DEVELOPMENT_TEAM = MH2BSYHQQX;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "NanoChallenge3-tvOS-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Trash Catcher";
@@ -562,7 +557,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = ATHR44FBVZ;
+				DEVELOPMENT_TEAM = MH2BSYHQQX;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "NanoChallenge3-tvOS-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Trash Catcher";

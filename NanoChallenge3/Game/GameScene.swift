@@ -54,16 +54,6 @@ class GameScene : SKScene, SKPhysicsContactDelegate{
         background.size = scaledSize
         background.alpha = 0.35
         addChild(background)
-//
-//        // Fade in animation for 3 seconds
-//        let fadeInAction = SKAction.fadeAlpha(to: 1, duration: 3.0)
-//        // Fade out animation to revert to original opacity
-//        let fadeOutAction = SKAction.fadeAlpha(to: 1.0, duration: 0.1)
-//        // Sequence both actions
-//        let fadeSequence = SKAction.sequence([fadeInAction, fadeOutAction])
-//
-//        // Run the sequence on the background node
-//        background.run(fadeSequence)
         
         // Fade in animation for 3 seconds
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
@@ -84,8 +74,6 @@ class GameScene : SKScene, SKPhysicsContactDelegate{
         binNode.physicsBody?.contactTestBitMask = 2 // Contact will be detected with bit mask 2 (garbageNodea)
         addChild(binNode)
     }
-    
-    
     
     
     //MARK: Garbage Spawning
@@ -110,7 +98,11 @@ class GameScene : SKScene, SKPhysicsContactDelegate{
         let delayAction = SKAction.wait(forDuration: 0.75)
         let spawnSequence = SKAction.sequence([spawnAction, delayAction])
         
-        run(SKAction.repeatForever(spawnSequence))
+        run(SKAction.repeatForever(spawnSequence), withKey: "spawnGarbage")
+    }
+    
+    func stopLoopSpawnGarbage() {
+        self.removeAction(forKey: "spawnGarbage")
     }
     
     //MARK: Swipe Handling
@@ -131,6 +123,11 @@ class GameScene : SKScene, SKPhysicsContactDelegate{
         }
         let texture = SKTexture(imageNamed: switchCharacterPosition(characterPosition: .left, character: binNode.imageUrl))
         binNode.run(SKAction.setTexture(texture))
+    }
+    
+    public func moveBinNode(xPosition : Double){
+        let moveAction = SKAction.move(to: CGPoint(x: xPosition, y: binNode.position.y), duration: 0.01)
+        binNode.run(moveAction)
     }
     
     //MARK: Collision
