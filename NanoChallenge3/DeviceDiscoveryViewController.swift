@@ -10,7 +10,7 @@ import UIKit
 import Combine
 import DeviceDiscoveryUI
 
-class ViewController: UIViewController {
+class DeviceDiscoveryViewController: UIViewController {
     
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var pinchView: UITextView!

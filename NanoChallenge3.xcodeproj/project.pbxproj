@@ -14,7 +14,7 @@
 		681629572A6BF878003F7D26 /* HandGestureProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681629562A6BF878003F7D26 /* HandGestureProcessor.swift */; };
 		68FB2BAD2A6C0AFC00B9642E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68FB2BAC2A6C0AFC00B9642E /* SceneDelegate.swift */; };
 		D80917CA2A657301007593A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80917C92A657301007593A4 /* AppDelegate.swift */; };
-		D80917CC2A657301007593A4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80917CB2A657301007593A4 /* ViewController.swift */; };
+		D80917CC2A657301007593A4 /* DeviceDiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80917CB2A657301007593A4 /* DeviceDiscoveryViewController.swift */; };
 		D80917CF2A657301007593A4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D80917CD2A657301007593A4 /* Main.storyboard */; };
 		D80917D12A657302007593A4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D80917D02A657302007593A4 /* Assets.xcassets */; };
 		D80917D42A657302007593A4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D80917D22A657302007593A4 /* LaunchScreen.storyboard */; };
@@ -41,7 +41,7 @@
 		68FB2BAC2A6C0AFC00B9642E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		D80917C62A657301007593A4 /* NanoChallenge3-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NanoChallenge3-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D80917C92A657301007593A4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D80917CB2A657301007593A4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		D80917CB2A657301007593A4 /* DeviceDiscoveryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceDiscoveryViewController.swift; sourceTree = "<group>"; };
 		D80917CE2A657301007593A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D80917D02A657302007593A4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D80917D32A657302007593A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -111,7 +111,7 @@
 				D82157992A69337A004650C5 /* PopUp */,
 				D84497142A666F99001BEBE9 /* Game */,
 				D80917C92A657301007593A4 /* AppDelegate.swift */,
-				D80917CB2A657301007593A4 /* ViewController.swift */,
+				D80917CB2A657301007593A4 /* DeviceDiscoveryViewController.swift */,
 				D80917CD2A657301007593A4 /* Main.storyboard */,
 				D80917D02A657302007593A4 /* Assets.xcassets */,
 				D80917D22A657302007593A4 /* LaunchScreen.storyboard */,
@@ -286,7 +286,7 @@
 				D821579F2A69396A004650C5 /* CustomFocusableButton.swift in Sources */,
 				681629492A6BF529003F7D26 /* LocalDeviceManager.swift in Sources */,
 				D84ABF662A66DCA80044FFFE /* BinNode.swift in Sources */,
-				D80917CC2A657301007593A4 /* ViewController.swift in Sources */,
+				D80917CC2A657301007593A4 /* DeviceDiscoveryViewController.swift in Sources */,
 				68FB2BAD2A6C0AFC00B9642E /* SceneDelegate.swift in Sources */,
 				D84497202A669FAD001BEBE9 /* GameViewController.swift in Sources */,
 				D83666092A67146E0051EA5B /* GarbageNode.swift in Sources */,
