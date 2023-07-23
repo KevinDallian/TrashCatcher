@@ -10,6 +10,7 @@ import SpriteKit
 import AVFoundation
 import Combine
 import DeviceDiscoveryUI
+import Lottie
 
 class GameViewController: UIViewController, ScoreDelegate {
     //MARK: Gameplay Variables
@@ -45,6 +46,8 @@ class GameViewController: UIViewController, ScoreDelegate {
         return imageView
     }()
     
+    let animationView = LottieAnimationView(name: "ArrowMotionOnboarding")
+
     //Audio
     var audioManager = AudioManager.shared
 //    var audioPlayerBackground: AVAudioPlayer?
@@ -325,16 +328,36 @@ class GameViewController: UIViewController, ScoreDelegate {
         ])
     }
     
-    func hidePersonImageViewAfterDelay(_ delay: TimeInterval) {
+    func setupArrow(){
+        animationView.contentMode = .scaleAspectFit
+        animationView.loopMode = .loop
+        animationView.play()
+        
+        animationView.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(animationView)
+        
+        NSLayoutConstraint.activate([
+            animationView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            animationView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -80),
+            animationView.widthAnchor.constraint(equalToConstant: 657),
+            animationView.heightAnchor.constraint(equalToConstant: 640)
+        ])
+    }
+    
+    func hidePersonAndArrowImageViewAfterDelay(_ delay: TimeInterval) {
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) { [weak self] in
             guard let self = self else { return }
             UIView.animate(withDuration: 0.5, animations: {
                 self.personImageView.alpha = 0.0 // Set alpha to 0 to hide the image
+                self.animationView.alpha = 0.0
             }) { (_) in
                 self.personImageView.removeFromSuperview() // Remove the imageView from its superview
+                self.animationView.removeFromSuperview()
             }
         }
     }
+    
     //MARK: DeviceDiscoveryUI
     func connectIOS() async {
         let parameters = NWParameters.applicationService
@@ -382,7 +405,9 @@ class GameViewController: UIViewController, ScoreDelegate {
         setupSwipedGestureRecognizer()
         setupHUD()
         setupPersonImageView()
-        hidePersonImageViewAfterDelay(3.0)
+        setupArrow()
+        hidePersonAndArrowImageViewAfterDelay(3.0)
+        
     }
     
     func scaleValue(_ value: CGFloat, fromRangeMin: CGFloat, fromRangeMax: CGFloat, toRangeMin: CGFloat, toRangeMax: CGFloat) -> CGFloat {

@@ -1,0 +1,6 @@
+framework module Pods_NanoChallenge3_tvOS {
+  umbrella header "Pods-NanoChallenge3-tvOS-umbrella.h"
+
+  export *
+  module * { export * }
+}
