@@ -192,11 +192,17 @@ class GameViewController: UIViewController, ScoreDelegate {
             
             restartButton.topAnchor.constraint(equalTo: popupView!.bottomAnchor, constant: 20),
             restartButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -150),
-
+            restartButton.widthAnchor.constraint(equalToConstant: 300),
+            restartButton.heightAnchor.constraint(equalToConstant: 100),
+            
             dismissButton.topAnchor.constraint(equalTo: popupView!.bottomAnchor, constant: 20),
             dismissButton.leadingAnchor.constraint(equalTo: restartButton.trailingAnchor, constant: 50),
             dismissButton.bottomAnchor.constraint(equalTo: restartButton.bottomAnchor),
+            dismissButton.heightAnchor.constraint(equalToConstant: 100),
+            dismissButton.widthAnchor.constraint(equalToConstant: 300)
+            
         ])
+        
         
     }
     
