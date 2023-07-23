@@ -24,7 +24,7 @@ class ViewController: UIViewController {
 
         setupBackground()
         
-        setupLabel()
+//        setupLabel()
         setupStartBtn()
         setupSoundButton()
 
@@ -85,7 +85,7 @@ class ViewController: UIViewController {
 
         NSLayoutConstraint.activate([
             startButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            startButton.topAnchor.constraint(equalTo: textRaiseHand.bottomAnchor, constant: 60),
+            startButton.topAnchor.constraint(equalTo: view.centerYAnchor, constant: 280),
             startButton.widthAnchor.constraint(equalToConstant: 300),
             startButton.heightAnchor.constraint(equalToConstant: 100),
         ])
@@ -124,7 +124,6 @@ class ViewController: UIViewController {
 
     @objc func soundButtonTapped() {
         isSoundOn.toggle()
-        let newImageName = isSoundOn ? "sound_on" : "sound_off"
         let soundButtonTitle = buttonType.getButtonType(type: isSoundOn ? .soundOn : .soundOff)
 
         if soundButtonTitle == "sound_on"{
