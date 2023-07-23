@@ -37,6 +37,7 @@ class GameViewController: UIViewController, ScoreDelegate {
         NSLog("ERROR: \(error)")
     })
     
+    
     private let personImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "person"))
         imageView.contentMode = .scaleAspectFill
@@ -105,7 +106,6 @@ class GameViewController: UIViewController, ScoreDelegate {
     
     //MARK: HUD
     func setupHUD(){
-        
         let whiteBackground = UIView()
           whiteBackground.backgroundColor = UIColor.white.withAlphaComponent(0.3)
           whiteBackground.translatesAutoresizingMaskIntoConstraints = false
@@ -234,6 +234,7 @@ class GameViewController: UIViewController, ScoreDelegate {
     //MARK: Popup
     private func showPopup() {
         // Create the popup view and customize it if needed
+        gameScene?.stopLoopSpawnGarbage()
         popupView = PopUpView(frame: CGRect(x: 0, y: 0, width: 1092, height: 538))
         popupView?.center = view.center
         popupView?.setupScore(score: score)
@@ -301,7 +302,6 @@ class GameViewController: UIViewController, ScoreDelegate {
         if audioPlayerBackground!.isPlaying {
             audioPlayerBackground!.pause()
         }
-        
         setupAudio(resourceName: "Item Collected", ofType: "mp3", shouldLoop: false, volume: 1.0)
         audioPlayer?.play()
         score += 1
@@ -313,7 +313,7 @@ class GameViewController: UIViewController, ScoreDelegate {
             }
         }
     }
-    
+    //MARK: Overlay
     func setupPersonImageView() {
         view.addSubview(personImageView)
         
@@ -356,7 +356,6 @@ class GameViewController: UIViewController, ScoreDelegate {
             
             let endpoint: NWEndpoint
             do {
-                print("DevicePicker")
                 endpoint = try await devicePickerController.endpoint
             } catch {
                 // The user canceled the endpoint picker view.
@@ -380,11 +379,11 @@ class GameViewController: UIViewController, ScoreDelegate {
         if let floatValue = Float(message!) {
             gameScene?.moveBinNode(xPosition: scaleValue(CGFloat(floatValue), fromRangeMin: 40, fromRangeMax: 800, toRangeMin: 0, toRangeMax: 1920))
             print("\(floatValue)")
-        }else{
+        }else{ // Pinch
 //            print("Pinched")
         }
     }
-    
+    // MARK: SetupSpriteKit
     func setupSpriteKit(){
         setupSKView()
         setupSwipedGestureRecognizer()

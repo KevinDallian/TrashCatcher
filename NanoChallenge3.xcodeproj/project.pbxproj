@@ -21,13 +21,13 @@
 		78E5CC5A2A6C3B760037E6EA /* Game End.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 78E5CC542A6C3B760037E6EA /* Game End.mp3 */; };
 		78E5CC5B2A6C3B760037E6EA /* Start Menu.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 78E5CC552A6C3B760037E6EA /* Start Menu.mp3 */; };
 		78E5CC5C2A6C3B760037E6EA /* Item Collected.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 78E5CC562A6C3B760037E6EA /* Item Collected.mp3 */; };
-		78E5CC5F2A6C40170037E6EA /* Sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E5CC5E2A6C40170037E6EA /* Sound.swift */; };
 		D80917CA2A657301007593A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80917C92A657301007593A4 /* AppDelegate.swift */; };
 		D80917CC2A657301007593A4 /* DeviceDiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80917CB2A657301007593A4 /* DeviceDiscoveryViewController.swift */; };
 		D80917CF2A657301007593A4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D80917CD2A657301007593A4 /* Main.storyboard */; };
 		D80917D12A657302007593A4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D80917D02A657302007593A4 /* Assets.xcassets */; };
 		D80917D42A657302007593A4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D80917D22A657302007593A4 /* LaunchScreen.storyboard */; };
 		D80B50172A6A507B009D3F3E /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D80B50162A6A507B009D3F3E /* SwiftUI.framework */; };
+		D80EAB7D2A6D074F00524D7A /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80EAB7C2A6D074F00524D7A /* AudioManager.swift */; };
 		D821579D2A693602004650C5 /* PopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D821579C2A693602004650C5 /* PopUpView.swift */; };
 		D821579F2A69396A004650C5 /* CustomFocusableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D821579E2A69396A004650C5 /* CustomFocusableButton.swift */; };
 		D83666092A67146E0051EA5B /* GarbageNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83666082A67146E0051EA5B /* GarbageNode.swift */; };
@@ -57,7 +57,6 @@
 		78E5CC542A6C3B760037E6EA /* Game End.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Game End.mp3"; sourceTree = "<group>"; };
 		78E5CC552A6C3B760037E6EA /* Start Menu.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Start Menu.mp3"; sourceTree = "<group>"; };
 		78E5CC562A6C3B760037E6EA /* Item Collected.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Item Collected.mp3"; sourceTree = "<group>"; };
-		78E5CC5E2A6C40170037E6EA /* Sound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
 		D80917C62A657301007593A4 /* NanoChallenge3-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NanoChallenge3-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D80917C92A657301007593A4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D80917CB2A657301007593A4 /* DeviceDiscoveryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceDiscoveryViewController.swift; sourceTree = "<group>"; };
@@ -65,6 +64,7 @@
 		D80917D02A657302007593A4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D80917D32A657302007593A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D80B50162A6A507B009D3F3E /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS16.4.sdk/System/Library/Frameworks/SwiftUI.framework; sourceTree = DEVELOPER_DIR; };
+		D80EAB7C2A6D074F00524D7A /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
 		D821579C2A693602004650C5 /* PopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpView.swift; sourceTree = "<group>"; };
 		D821579E2A69396A004650C5 /* CustomFocusableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFocusableButton.swift; sourceTree = "<group>"; };
 		D83666082A67146E0051EA5B /* GarbageNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GarbageNode.swift; sourceTree = "<group>"; };
@@ -124,14 +124,6 @@
 			path = Audio;
 			sourceTree = "<group>";
 		};
-		78E5CC5D2A6C40080037E6EA /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				78E5CC5E2A6C40170037E6EA /* Sound.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
 		D80917BD2A657301007593A4 = {
 			isa = PBXGroup;
 			children = (
@@ -156,7 +148,6 @@
 		D80917C82A657301007593A4 /* NanoChallenge3 */ = {
 			isa = PBXGroup;
 			children = (
-				78E5CC5D2A6C40080037E6EA /* Extensions */,
 				78E5CC4F2A6C395D0037E6EA /* Audio */,
 				78E5CC4C2A6C0B860037E6EA /* Fonts */,
 				D80B50132A6A3AAB009D3F3E /* GlobalComponents */,
@@ -178,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				D821579E2A69396A004650C5 /* CustomFocusableButton.swift */,
+				D80EAB7C2A6D074F00524D7A /* AudioManager.swift */,
 			);
 			path = GlobalComponents;
 			sourceTree = "<group>";
@@ -349,10 +341,10 @@
 				78E5CC4B2A6C0A2F0037E6EA /* SceneDelegate.swift in Sources */,
 				D84ABF662A66DCA80044FFFE /* BinNode.swift in Sources */,
 				D80917CC2A657301007593A4 /* DeviceDiscoveryViewController.swift in Sources */,
-				78E5CC5F2A6C40170037E6EA /* Sound.swift in Sources */,
 				681629492A6BF529003F7D26 /* LocalDeviceManager.swift in Sources */,
 				D84ABF662A66DCA80044FFFE /* BinNode.swift in Sources */,
 				D80917CC2A657301007593A4 /* DeviceDiscoveryViewController.swift in Sources */,
+				D80EAB7D2A6D074F00524D7A /* AudioManager.swift in Sources */,
 				68FB2BAD2A6C0AFC00B9642E /* SceneDelegate.swift in Sources */,
 				D84497202A669FAD001BEBE9 /* GameViewController.swift in Sources */,
 				D83666092A67146E0051EA5B /* GarbageNode.swift in Sources */,

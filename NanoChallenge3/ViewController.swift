@@ -16,31 +16,24 @@ class ViewController: UIViewController {
     private var playButton: UIButton!
     let startButton = CustomFocusableButton().createButton(title: "Start Game", fontSize: 40)
     var soundButton = CustomFocusableButton().createButton(title: "sound_on" , fontSize: 40)
-    var audioPlayer: AVAudioPlayer?
+    var audioManager = AudioManager.shared
     var isSoundOn = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupBackground()
-        setupSoundButton()
+        
         setupLabel()
         setupStartBtn()
+        setupSoundButton()
 
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        setupAudio(resourceName: "Start Menu", ofType: "mp3", shouldLoop: true, volume: 0.5)
-        // Check if the audio player is available and play the audio
-//        if let player = audioPlayer {
-//            player.play()
-//        }
+        audioManager.setupAudio(resourceName: "Start Menu", audioType: .background, ofType: "mp3", shouldLoop: true, volume: 0.1)
+        audioManager.playSound(audioType: .background)
     }
-
-    func setupAudio(resourceName:String, ofType:String, shouldLoop:Bool, volume:Float){
-        audioPlayer = AVAudioPlayer.setupAudioPlayer(resourceName: resourceName, ofType: ofType, shouldLoop: shouldLoop, volume: volume)
-    }
-
 
     func setupBackground() {
         let backgroundImage = UIImage(named: "background-start")
@@ -48,18 +41,6 @@ class ViewController: UIViewController {
         backgroundImageView.contentMode = .scaleAspectFill
         backgroundImageView.frame = view.bounds
         view.addSubview(backgroundImageView)
-
-        soundButton.addTarget(self, action: #selector(soundButtonTapped), for: .primaryActionTriggered)
-        self.view.addSubview(soundButton)
-
-        NSLayoutConstraint.activate([
-            soundButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-                       soundButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-//            soundButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            soundButton.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -20),
-            soundButton.widthAnchor.constraint(equalToConstant: 106),
-            soundButton.heightAnchor.constraint(equalToConstant: 106)
-        ])
     }
 
     func setupLogo() {
@@ -117,13 +98,12 @@ class ViewController: UIViewController {
     @objc func didTapButton() {
 
         // Play the "Button click" audio
-        setupAudio(resourceName: "Button Click", ofType: "mp3", shouldLoop: false, volume: 1.0)
-        audioPlayer?.play()
+        audioManager.setupAudio(resourceName: "Button Click", audioType: .soundtrack, ofType: "mp3", shouldLoop: false, volume: 1.0)
+        audioManager.playSound(audioType: .soundtrack)
+        audioManager.stopBackground()
         let nextViewController = GameViewController()
         nextViewController.modalPresentationStyle = .fullScreen
         self.present(nextViewController, animated: true, completion: nil)
-
-
     }
 
     func setupSoundButton() {
@@ -131,26 +111,38 @@ class ViewController: UIViewController {
         self.view.addSubview(soundButton)
 
         NSLayoutConstraint.activate([
-            soundButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 80),
-            soundButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            soundButton.widthAnchor.constraint(equalToConstant: 106),
-            soundButton.heightAnchor.constraint(equalToConstant: 106)
-        ])
+                soundButton.leadingAnchor.constraint(equalTo: startButton.trailingAnchor, constant: 40),
+                soundButton.centerYAnchor.constraint(equalTo: startButton.centerYAnchor),
+                soundButton.widthAnchor.constraint(equalToConstant: 106),
+                soundButton.heightAnchor.constraint(equalToConstant: 106)
+            ])
 
         }
 
-        @objc func soundButtonTapped() {
-            isSoundOn = !isSoundOn
-            let newImageName = isSoundOn ? "sound_on" : "sound_off"
-            soundButton.setBackgroundImage(UIImage(named: newImageName), for: .normal)
+    @objc func soundButtonTapped() {
+        isSoundOn.toggle()
+        let newImageName = isSoundOn ? "sound_on" : "sound_off"
+        let soundButtonTitle = buttonType.getButtonType(type: isSoundOn ? .soundOn : .soundOff)
 
-            // Perform any actions you want when the button is tapped, for example, play or pause sound
-            if isSoundOn {
-                // Play the sound
-            } else {
-                // Pause or stop the sound
-            }
+        if soundButtonTitle == "sound_on"{
+        soundButton.setBackgroundImage(UIImage(named: "soundon"), for: .normal)
+            soundButton.setBackgroundImage(UIImage(named: "soundonfocused"), for: .focused)
         }
+        
+        else if soundButtonTitle == "sound_off"{
+            soundButton.setBackgroundImage(UIImage(named: "soundoff"), for: .normal)
+            soundButton.setBackgroundImage(UIImage(named: "soundofffocused"), for: .focused)
+        }
+        
+        // Perform any actions you want when the button is tapped, for example, play or pause sound
+        if isSoundOn {
+            audioManager.isMuted = false
+            audioManager.playSound(audioType: .background)
+        } else {
+            audioManager.isMuted = true
+            audioManager.stopBackground()
+        }
+    }
 
     func attributedStringWithStroke(text: String, strokeWidth: Float, strokeColor: UIColor, fillColor: UIColor, font: UIFont, letterSpacing: CGFloat, lineHeight: CGFloat) -> NSAttributedString {
         let paragraphStyle = NSMutableParagraphStyle()

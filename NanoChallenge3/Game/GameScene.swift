@@ -86,8 +86,6 @@ class GameScene : SKScene, SKPhysicsContactDelegate{
     }
     
     
-    
-    
     //MARK: Garbage Spawning
     private func spawnGarbage(){
         let garbage = GarbageNode()
@@ -111,6 +109,10 @@ class GameScene : SKScene, SKPhysicsContactDelegate{
         let spawnSequence = SKAction.sequence([spawnAction, delayAction])
         
         run(SKAction.repeatForever(spawnSequence))
+    }
+    
+    func stopLoopSpawnGarbage() {
+        self.removeAction(forKey: "spawnsequence")
     }
     
     //MARK: Swipe Handling
