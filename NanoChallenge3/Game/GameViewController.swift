@@ -23,8 +23,8 @@ class GameViewController: UIViewController, ScoreDelegate {
     let restartButton = CustomFocusableButton().createButton(title: "Play Again", fontSize: 40)
     
     //MARK: Timer Variable
-    let gameDuration : TimeInterval = 60
-    var remainingSeconds : TimeInterval = 60
+    let gameDuration : TimeInterval = 5
+    var remainingSeconds : TimeInterval = 5
     var timer : Timer?
     var timerLabel : UILabel?
     var rectangleBar: UIView!
@@ -238,6 +238,19 @@ class GameViewController: UIViewController, ScoreDelegate {
     //MARK: Popup
     private func showPopup() {
         // Create the popup view and customize it if needed
+        audioManager.setupAudio(resourceName: "Game End", audioType: .soundtrack, ofType: "mp3", shouldLoop: false, volume: 0.2)
+        
+        if !audioManager.isMuted {
+            audioManager.pauseBackground()
+            audioManager.playSound(audioType: .soundtrack)
+           
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
+            self.audioManager.playSound(audioType: .background)
+        }
+        
+        
         gameScene?.stopLoopSpawnGarbage()
         popupView = PopUpView(frame: CGRect(x: 0, y: 0, width: 1092, height: 538))
         popupView?.center = view.center
