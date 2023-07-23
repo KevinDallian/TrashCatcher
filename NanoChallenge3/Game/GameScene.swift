@@ -133,6 +133,11 @@ class GameScene : SKScene, SKPhysicsContactDelegate{
         binNode.run(SKAction.setTexture(texture))
     }
     
+    public func moveBinNode(xPosition : Double){
+        let moveAction = SKAction.move(to: CGPoint(x: xPosition, y: binNode.position.y), duration: 0.01)
+        binNode.run(moveAction)
+    }
+    
     //MARK: Collision
     private func handleCollision(_ contact : SKPhysicsContact){
         // get garbageNode that collides

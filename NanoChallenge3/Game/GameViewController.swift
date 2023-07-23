@@ -8,6 +8,8 @@
 import UIKit
 import SpriteKit
 import AVFoundation
+import Combine
+import DeviceDiscoveryUI
 
 class GameViewController: UIViewController, ScoreDelegate {
     //MARK: Gameplay Variables
@@ -20,13 +22,20 @@ class GameViewController: UIViewController, ScoreDelegate {
     let restartButton = CustomFocusableButton().createButton(title: "Play Again", fontSize: 40)
     
     //MARK: Timer Variable
-    let gameDuration : TimeInterval = 5
-    var remainingSeconds : TimeInterval = 5
+    let gameDuration : TimeInterval = 60
+    var remainingSeconds : TimeInterval = 60
     var timer : Timer?
     var timerLabel : UILabel?
     var rectangleBar: UIView!
     var rectangleBarWidthConstraint: NSLayoutConstraint!
     var widthAnimator: UIViewPropertyAnimator?
+    var positionPoint : Float!
+    
+    var localDeviceManager = LocalDeviceManager(applicationService: "trashCatcher", didReceiveMessage: { data in
+        guard let string = String(data: data, encoding: .utf8) else { return }
+    }, errorHandler: { error in
+        NSLog("ERROR: \(error)")
+    })
     
     private let personImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "person"))
@@ -38,14 +47,11 @@ class GameViewController: UIViewController, ScoreDelegate {
     //Audio
     var audioPlayerBackground: AVAudioPlayer?
     var audioPlayer: AVAudioPlayer?
-    
+    //MARK: ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupSKView()
-        setupSwipedGestureRecognizer()
-        setupHUD()
-        setupPersonImageView()
-        hidePersonImageViewAfterDelay(3.0)
+        connectIOS()
+        localDeviceManager.didReceiveMessage = messageReceivedFromManager(_:)
         
     }
     
@@ -335,6 +341,68 @@ class GameViewController: UIViewController, ScoreDelegate {
     }
     func setupAudio(resourceName:String, ofType:String, shouldLoop:Bool, volume: Float){
         audioPlayer = AVAudioPlayer.setupAudioPlayer(resourceName: resourceName, ofType: ofType, shouldLoop: shouldLoop, volume: volume)
+    }
+    //MARK: DeviceDiscoveryUI
+    func connectIOS() async {
+        let parameters = NWParameters.applicationService
+                
+        // Create the view controller for the endpoint picker.
+        if let devicePickerController =
+            DDDevicePickerViewController(browseDescriptor: NWBrowser.Descriptor.applicationService(name: "trashCatcher"), parameters: parameters){
+
+            // Show the network device picker as a full-screen, modal view.
+            devicePickerController.modalTransitionStyle = UIModalTransitionStyle.coverVertical
+            present(devicePickerController, animated: true, completion: nil)
+            
+            let endpoint: NWEndpoint
+            do {
+                print("DevicePicker")
+                endpoint = try await devicePickerController.endpoint
+            } catch {
+                // The user canceled the endpoint picker view.
+                return
+            }
+            localDeviceManager.connect(to: endpoint)
+            setupSpriteKit()
+        } else {
+        }
+    }
+    
+    func connectIOS() {
+        Task {
+            await connectIOS()
+        }
+    }
+    
+    func messageReceivedFromManager(_ data: Data) {
+        let message = String(data: data, encoding: .utf8)
+        
+        if let floatValue = Float(message!) {
+            gameScene?.moveBinNode(xPosition: scaleValue(CGFloat(floatValue), fromRangeMin: 40, fromRangeMax: 800, toRangeMin: 0, toRangeMax: 1920))
+            print("\(floatValue)")
+        }else{
+//            print("Pinched")
+        }
+    }
+    
+    func setupSpriteKit(){
+        setupSKView()
+        setupSwipedGestureRecognizer()
+        setupHUD()
+        setupPersonImageView()
+        hidePersonImageViewAfterDelay(3.0)
+    }
+    
+    func scaleValue(_ value: CGFloat, fromRangeMin: CGFloat, fromRangeMax: CGFloat, toRangeMin: CGFloat, toRangeMax: CGFloat) -> CGFloat {
+        // Ensure the value is within the fromRange limits
+        let clampedValue = min(max(value, fromRangeMin), fromRangeMax)
+
+        // Calculate the scaled value
+        let fromRange = fromRangeMax - fromRangeMin
+        let toRange = toRangeMax - toRangeMin
+        let scaledValue = toRangeMin + ((clampedValue - fromRangeMin) / fromRange) * toRange
+
+        return scaledValue
     }
 }
 
