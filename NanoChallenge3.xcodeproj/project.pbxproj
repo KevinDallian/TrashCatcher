@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6800C2D92A6D66E400E7F71C /* ArrowMotionOnboarding.json in Resources */ = {isa = PBXBuildFile; fileRef = 6800C2D82A6D66E400E7F71C /* ArrowMotionOnboarding.json */; };
 		681629492A6BF529003F7D26 /* LocalDeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681629482A6BF529003F7D26 /* LocalDeviceManager.swift */; };
 		6816294A2A6BF529003F7D26 /* LocalDeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681629482A6BF529003F7D26 /* LocalDeviceManager.swift */; };
 		681629532A6BF830003F7D26 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681629512A6BF830003F7D26 /* CameraView.swift */; };
@@ -21,6 +22,7 @@
 		78E5CC5A2A6C3B760037E6EA /* Game End.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 78E5CC542A6C3B760037E6EA /* Game End.mp3 */; };
 		78E5CC5B2A6C3B760037E6EA /* Start Menu.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 78E5CC552A6C3B760037E6EA /* Start Menu.mp3 */; };
 		78E5CC5C2A6C3B760037E6EA /* Item Collected.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 78E5CC562A6C3B760037E6EA /* Item Collected.mp3 */; };
+		870D250DEB4C153B86E99A77 /* Pods_NanoChallenge3_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9842E95C817A6F36C3A1BF31 /* Pods_NanoChallenge3_tvOS.framework */; };
 		D80917CA2A657301007593A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80917C92A657301007593A4 /* AppDelegate.swift */; };
 		D80917CC2A657301007593A4 /* DeviceDiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80917CB2A657301007593A4 /* DeviceDiscoveryViewController.swift */; };
 		D80917CF2A657301007593A4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D80917CD2A657301007593A4 /* Main.storyboard */; };
@@ -44,6 +46,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5477E9BB68E1C607C015D44C /* Pods-NanoChallenge3-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NanoChallenge3-tvOS.release.xcconfig"; path = "Target Support Files/Pods-NanoChallenge3-tvOS/Pods-NanoChallenge3-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		54C850EF85227BE6F20034B2 /* Pods-NanoChallenge3-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NanoChallenge3-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-NanoChallenge3-tvOS/Pods-NanoChallenge3-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		6800C2D82A6D66E400E7F71C /* ArrowMotionOnboarding.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ArrowMotionOnboarding.json; sourceTree = "<group>"; };
 		681629482A6BF529003F7D26 /* LocalDeviceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDeviceManager.swift; sourceTree = "<group>"; };
 		681629512A6BF830003F7D26 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		681629542A6BF869003F7D26 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
@@ -57,6 +62,7 @@
 		78E5CC542A6C3B760037E6EA /* Game End.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Game End.mp3"; sourceTree = "<group>"; };
 		78E5CC552A6C3B760037E6EA /* Start Menu.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Start Menu.mp3"; sourceTree = "<group>"; };
 		78E5CC562A6C3B760037E6EA /* Item Collected.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Item Collected.mp3"; sourceTree = "<group>"; };
+		9842E95C817A6F36C3A1BF31 /* Pods_NanoChallenge3_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NanoChallenge3_tvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D80917C62A657301007593A4 /* NanoChallenge3-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NanoChallenge3-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D80917C92A657301007593A4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D80917CB2A657301007593A4 /* DeviceDiscoveryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceDiscoveryViewController.swift; sourceTree = "<group>"; };
@@ -89,6 +95,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D84ABF612A66D1DE0044FFFE /* SpriteKit.framework in Frameworks */,
+				870D250DEB4C153B86E99A77 /* Pods_NanoChallenge3_tvOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,6 +131,15 @@
 			path = Audio;
 			sourceTree = "<group>";
 		};
+		D74ACE69FB185A27E4B94392 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				54C850EF85227BE6F20034B2 /* Pods-NanoChallenge3-tvOS.debug.xcconfig */,
+				5477E9BB68E1C607C015D44C /* Pods-NanoChallenge3-tvOS.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		D80917BD2A657301007593A4 = {
 			isa = PBXGroup;
 			children = (
@@ -133,6 +149,7 @@
 				D84497012A6665A1001BEBE9 /* NanoChallenge3-iOS */,
 				D80917C72A657301007593A4 /* Products */,
 				D84ABF5F2A66D1DD0044FFFE /* Frameworks */,
+				D74ACE69FB185A27E4B94392 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -148,6 +165,7 @@
 		D80917C82A657301007593A4 /* NanoChallenge3 */ = {
 			isa = PBXGroup;
 			children = (
+				6800C2D82A6D66E400E7F71C /* ArrowMotionOnboarding.json */,
 				78E5CC4F2A6C395D0037E6EA /* Audio */,
 				78E5CC4C2A6C0B860037E6EA /* Fonts */,
 				D80B50132A6A3AAB009D3F3E /* GlobalComponents */,
@@ -213,6 +231,7 @@
 			children = (
 				D80B50162A6A507B009D3F3E /* SwiftUI.framework */,
 				D84ABF602A66D1DD0044FFFE /* SpriteKit.framework */,
+				9842E95C817A6F36C3A1BF31 /* Pods_NanoChallenge3_tvOS.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -233,9 +252,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D80917D72A657302007593A4 /* Build configuration list for PBXNativeTarget "NanoChallenge3-tvOS" */;
 			buildPhases = (
+				BDA02E6592F887BF4D46AFF2 /* [CP] Check Pods Manifest.lock */,
 				D80917C22A657301007593A4 /* Sources */,
 				D80917C32A657301007593A4 /* Frameworks */,
 				D80917C42A657301007593A4 /* Resources */,
+				C3A49ABAFE378DB3AC2F1E04 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -314,6 +335,7 @@
 				78E5CC592A6C3B760037E6EA /* Character Movement.mp3 in Resources */,
 				78E5CC4E2A6C0C330037E6EA /* BubblegumSans-Regular.ttf in Resources */,
 				78E5CC582A6C3B760037E6EA /* Gameplay.mp3 in Resources */,
+				6800C2D92A6D66E400E7F71C /* ArrowMotionOnboarding.json in Resources */,
 				D80917CF2A657301007593A4 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -329,6 +351,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		BDA02E6592F887BF4D46AFF2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NanoChallenge3-tvOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C3A49ABAFE378DB3AC2F1E04 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NanoChallenge3-tvOS/Pods-NanoChallenge3-tvOS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NanoChallenge3-tvOS/Pods-NanoChallenge3-tvOS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NanoChallenge3-tvOS/Pods-NanoChallenge3-tvOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D80917C22A657301007593A4 /* Sources */ = {
@@ -522,6 +586,7 @@
 		};
 		D80917D82A657302007593A4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 54C850EF85227BE6F20034B2 /* Pods-NanoChallenge3-tvOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -552,6 +617,7 @@
 		};
 		D80917D92A657302007593A4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5477E9BB68E1C607C015D44C /* Pods-NanoChallenge3-tvOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
