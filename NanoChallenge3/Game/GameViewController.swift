@@ -48,7 +48,6 @@ class GameViewController: UIViewController, ScoreDelegate {
     
     let animationView = LottieAnimationView(name: "ArrowMotionOnboarding")
 
-    
     //Audio
     var audioManager = AudioManager.shared
 //    var audioPlayerBackground: AVAudioPlayer?
@@ -56,9 +55,8 @@ class GameViewController: UIViewController, ScoreDelegate {
     //MARK: ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-//        connectIOS()
-//        localDeviceManager.didReceiveMessage = messageReceivedFromManager(_:)
-        setupSpriteKit()
+        connectIOS()
+        localDeviceManager.didReceiveMessage = messageReceivedFromManager(_:)
         audioManager.setupAudio(resourceName: "Item Collected", audioType: .soundtrack, ofType: "mp3", shouldLoop: false, volume: 0.1)
     }
     
