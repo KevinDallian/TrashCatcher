@@ -9,7 +9,7 @@ import Foundation
 import AVFoundation
 
 class AudioManager {
-    var isMuted = true
+    var isMuted = false
     private var audioPlayerBackground : AVAudioPlayer!
     private var soundtrackPlayer : AVAudioPlayer!
     
@@ -39,7 +39,9 @@ class AudioManager {
         audioPlayerBackground.stop()
     }
     
-    
+    func pauseBackground(){
+        audioPlayerBackground.pause()
+    }
 }
 
 enum AudioType{

@@ -32,7 +32,10 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         audioManager.setupAudio(resourceName: "Start Menu", audioType: .background, ofType: "mp3", shouldLoop: true, volume: 0.1)
-        audioManager.playSound(audioType: .background)
+        if !audioManager.isMuted {
+            audioManager.playSound(audioType: .background)
+        }
+        
     }
 
     func setupBackground() {
