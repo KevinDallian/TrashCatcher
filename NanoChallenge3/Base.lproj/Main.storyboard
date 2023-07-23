@@ -21,7 +21,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="this should be coordinate" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dFu-Np-rD1">
-                                <rect key="frame" x="328" y="191" width="1251" height="677"/>
+                                <rect key="frame" x="335" y="202" width="931" height="95"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="this should be pinch state" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mlw-6D-i4c">
+                                <rect key="frame" x="335" y="305" width="570" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="textColor" systemColor="labelColor"/>
@@ -33,6 +41,7 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
+                        <outlet property="pinchView" destination="Mlw-6D-i4c" id="JG7-qH-Tx4"/>
                         <outlet property="textView" destination="dFu-Np-rD1" id="6e1-ha-AlC"/>
                     </connections>
                 </viewController>

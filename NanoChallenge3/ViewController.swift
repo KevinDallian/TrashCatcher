@@ -13,10 +13,10 @@ import DeviceDiscoveryUI
 class ViewController: UIViewController {
     
     @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var pinchView: UITextView!
     
     var deviceManager = LocalDeviceManager(applicationService: "trashCatcher", didReceiveMessage: { data in
         guard let string = String(data: data, encoding: .utf8) else { return }
-        NSLog("Message: \(string)")
     }, errorHandler: { error in
         NSLog("ERROR: \(error)")
     })
@@ -59,7 +59,12 @@ class ViewController: UIViewController {
     
     func messageReceivedFromManager(_ data: Data) {
         let message = String(data: data, encoding: .utf8)
-        textView.text = message
+        
+        if let floatValue = Float(message!) {
+            textView.text = String(floatValue)
+        }else{
+            pinchView.text = message
+        }
     }
     
 }
