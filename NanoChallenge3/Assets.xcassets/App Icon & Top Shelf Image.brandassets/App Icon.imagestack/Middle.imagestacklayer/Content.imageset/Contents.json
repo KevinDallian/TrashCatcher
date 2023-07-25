@@ -1,12 +1,8 @@
 {
   "images" : [
     {
-      "idiom" : "tv",
-      "scale" : "1x"
-    },
-    {
-      "idiom" : "tv",
-      "scale" : "2x"
+      "filename" : "WhatsApp Image 2023-07-24 at 14.02 1.png",
+      "idiom" : "tv"
     }
   ],
   "info" : {

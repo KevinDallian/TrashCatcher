@@ -23,8 +23,8 @@ class GameViewController: UIViewController, ScoreDelegate {
     let restartButton = CustomFocusableButton().createButton(title: "Play Again", fontSize: 40)
     
     //MARK: Timer Variable
-    let gameDuration : TimeInterval = 5
-    var remainingSeconds : TimeInterval = 5
+    let gameDuration : TimeInterval = 60
+    var remainingSeconds : TimeInterval = 60
     var timer : Timer?
     var timerLabel : UILabel?
     var rectangleBar: UIView!
@@ -50,8 +50,6 @@ class GameViewController: UIViewController, ScoreDelegate {
 
     //Audio
     var audioManager = AudioManager.shared
-//    var audioPlayerBackground: AVAudioPlayer?
-//    var audioPlayer: AVAudioPlayer?
     //MARK: ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -285,9 +283,6 @@ class GameViewController: UIViewController, ScoreDelegate {
     
     //MARK: Buttons
     @objc private func dismissButtonTapped() {
-        // Play the "Button click" audio
-//        setupAudio(resourceName: "Button Click", ofType: "mp3", shouldLoop: false, volume: 1.0)
-//        audioPlayer?.play()
         if !audioManager.isMuted {
             audioManager.setupAudio(resourceName: "Button Click", audioType: .soundtrack, ofType: "mp3", shouldLoop: false, volume: 1.0)
             audioManager.playSound(audioType: .soundtrack)
@@ -311,7 +306,8 @@ class GameViewController: UIViewController, ScoreDelegate {
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
         restartButton.removeFromSuperview()
         dismissButton.removeFromSuperview()
-       
+        gameScene?.loopSpawnGarbage()
+        audioManager.setupAudio(resourceName: "Item Collected", audioType: .soundtrack, ofType: "mpr", shouldLoop: false, volume: 0.1)
     }
     
     func addScore() {

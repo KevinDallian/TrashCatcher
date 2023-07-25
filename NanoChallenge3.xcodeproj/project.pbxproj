@@ -263,6 +263,8 @@
 			dependencies = (
 			);
 			name = "NanoChallenge3-tvOS";
+			packageProductDependencies = (
+			);
 			productName = NanoChallenge3;
 			productReference = D80917C62A657301007593A4 /* NanoChallenge3-tvOS.app */;
 			productType = "com.apple.product-type.application";
@@ -311,6 +313,8 @@
 				Base,
 			);
 			mainGroup = D80917BD2A657301007593A4;
+			packageReferences = (
+			);
 			productRefGroup = D80917C72A657301007593A4 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";

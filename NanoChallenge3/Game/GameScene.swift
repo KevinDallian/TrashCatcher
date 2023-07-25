@@ -91,7 +91,7 @@ class GameScene : SKScene, SKPhysicsContactDelegate{
         addChild(garbage)
     }
     
-    private func loopSpawnGarbage(){
+    func loopSpawnGarbage(){
         let spawnAction = SKAction.run {
             self.spawnGarbage()
         }
