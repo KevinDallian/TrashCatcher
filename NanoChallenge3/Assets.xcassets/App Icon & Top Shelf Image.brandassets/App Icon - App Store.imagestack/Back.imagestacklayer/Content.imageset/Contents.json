@@ -1,6 +1,7 @@
 {
   "images" : [
     {
+      "filename" : "AppIcon - tvOS.png",
       "idiom" : "tv"
     }
   ],
